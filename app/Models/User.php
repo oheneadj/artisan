@@ -18,7 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'username',
+        'date_of_birth',
+        'location',
+        'card_type',
+        'card_number',
+        'verified',
+        'phone_number',
+        'user_type',
         'email',
         'password',
     ];
@@ -40,6 +49,17 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'number_verfied_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Relationships
+     *
+     * @var function<string, string>
+     */
+    public function shop()
+    {
+        return $this->hasOne(Shop::class);
+    }
 }
