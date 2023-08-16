@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,13 +13,13 @@ class ServiceController extends Controller
     public function index()
     {
         //
-
+        return view('index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function about()
+    public function create()
     {
         //
     }
@@ -28,6 +29,11 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'user_id' => 'required',
+            'name' => 'required',
+            'shop_id' => 'required'
+        ]);
     }
 
     /**
