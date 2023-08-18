@@ -20,13 +20,13 @@ class PageController extends Controller
     public function about()
     {
         //
-        return view('pages.about');
+        return view('pages.about', ['page_title' => 'About']);
     }
 
 
     public function faq()
     {
-        return view('pages.faq', ["faqs" => Faq::all()]);
+        return view('pages.faq', ['page_title' => 'Frequently Asked Questions']);
     }
 
     /**
@@ -47,11 +47,13 @@ class PageController extends Controller
     public function support()
     {
         //
+        return view('pages.support', ['page_title' => 'Support']);
     }
 
 
     public function contact_us()
     {
         //
+        return view('pages.contact-us', ['page_title' => 'Contact Us']);
     }
 }

@@ -1,6 +1,6 @@
 <x-layout>
-    <x-breadcrumbs>
-        Frequently Asked Questions
+    <x-breadcrumbs :message="$page_title">
+
     </x-breadcrumbs>
     <section class="faq section">
         <div class="container">
