@@ -17,19 +17,25 @@
                          <div class="navbar-collapse sub-menu-bar collapse" id="navbarSupportedContent">
                              <ul id="nav" class="navbar-nav ms-auto">
                                  <li class="nav-item">
-                                     <a href="{{ route('home') }}" aria-label="Toggle navigation">Home</a>
+                                     <a href="{{ route('home') }}" aria-label="Toggle navigation"
+                                         class="@if (Route::current()->getName() == 'home') {{ 'active' }} @endif">Home</a>
                                  </li>
                                  <li class="nav-item">
-                                     <a href="{{ route('home') }}" aria-label="Toggle navigation">All Shops</a>
+                                     <a href="{{ route('home') }}" aria-label="Toggle navigation"
+                                         class="@if (Route::current()->getName() == 'home') {{ 'active' }} @endif">All
+                                         Shops</a>
                                  </li>
                                  <li class="nav-item">
-                                     <a href="{{ route('about') }}" aria-label="Toggle navigation">About</a>
+                                     <a href="{{ route('about') }}" aria-label="Toggle navigation"
+                                         class="@if (Route::current()->getName() == 'about') {{ 'active' }} @endif">About</a>
                                  </li>
                                  <li class="nav-item">
-                                     <a href="{{ route('faq') }}" aria-label="Toggle navigation">Faq</a>
+                                     <a href="{{ route('faq') }}" aria-label="Toggle navigation"
+                                         class="@if (Route::current()->getName() == 'faq') {{ 'active' }} @endif">Faq</a>
                                  </li>
                                  <li class="nav-item">
-                                     <a href="{{ route('contact-us') }}" aria-label="Toggle navigation">Contact</a>
+                                     <a href="{{ route('contact-us') }}" aria-label="Toggle navigation"
+                                         class="@if (Route::current()->getName() == 'contact-us') {{ 'active' }} @endif">Contact</a>
                                  </li>
                              </ul>
                          </div> <!-- navbar collapse -->
