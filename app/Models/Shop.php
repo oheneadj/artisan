@@ -24,7 +24,7 @@ class Shop extends Model
      */
     public function service()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Ad::class);
     }
 
     public function user()

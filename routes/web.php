@@ -65,4 +65,13 @@ Route::put('/reset-password', [BookingController::class, 'update']);
 Route::delete('/services', [BookingController::class, 'destroy']);
 
 
+/**
+ * Pages Routes
+ */
 Route::get('/', [PageController::class, 'index']);
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/faq', [PageController::class, 'faq']);
+Route::get('/terms-of-use', [PageController::class, 'terms_of_use']);
+Route::get('/privacy-policy', [PageController::class, 'privacy_policy']);
+Route::get('/support', [PageController::class, 'support']);
+Route::get('/contact-us', [PageController::class, 'contact_us']);

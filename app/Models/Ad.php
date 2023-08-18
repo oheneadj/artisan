@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Ad extends Model
 {
     use HasFactory;
-
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +15,7 @@ class Service extends Model
      * @var array<int, string>
      */
 
-    protected $fillable = ['user_id', 'name', 'shop_id'];
+    protected $fillable = ['user_id', 'name', 'price', 'shop_id'];
 
     /**
      * Relationships

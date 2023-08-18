@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('ads', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->foreignId('shop_id')->constrained()->onDelete('cascade');
+            $table->string('price');
+            //$table->foreignId('shop_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.s
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('ads');
     }
 };

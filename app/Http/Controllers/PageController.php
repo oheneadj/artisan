@@ -3,67 +3,54 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Ad;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
-        return view('index');
+        return view('pages.index', ["ads" => Ad::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function about()
     {
         //
+        return view('pages.about');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function faq()
     {
-        $data = $request->validate([
-            'user_id' => 'required',
-            'name' => 'required',
-            'shop_id' => 'required'
-        ]);
+        return view('pages.faq', ["faqs" => Faq::all()]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function terms_of_use()
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function privacy_policy(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+
+    public function support()
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+    public function contact_us()
     {
         //
     }
