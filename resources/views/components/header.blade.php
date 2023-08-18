@@ -22,7 +22,7 @@
                                  </li>
                                  <li class="nav-item">
                                      <a href="{{ route('home') }}" aria-label="Toggle navigation"
-                                         class="@if (Route::current()->getName() == 'home') {{ 'active' }} @endif">All
+                                         class="@if (Route::current()->getName() == 'shops') {{ 'active' }} @endif">All
                                          Shops</a>
                                  </li>
                                  <li class="nav-item">

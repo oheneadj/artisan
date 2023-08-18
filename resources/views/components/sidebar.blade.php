@@ -10,7 +10,7 @@
         </div>
         <!-- End Single Widget -->
         <!-- Start Single Widget -->
-        <div class="single-widget">
+        <div class="single-widget d-none d-md-block">
             <h3>All Categories</h3>
             <ul class="list">
                 <li>
@@ -46,7 +46,7 @@
         </div>
         <!-- End Single Widget -->
         <!-- Start Single Widget -->
-        <div class="single-widget range">
+        <div class="single-widget range d-none d-md-block">
             <h3>Price Range</h3>
             <input type="range" class="form-range" name="range" step="1" min="100" max="10000"
                 value="10" onchange="rangePrimary.value=value">
@@ -57,7 +57,7 @@
         </div>
         <!-- End Single Widget -->
         <!-- Start Single Widget -->
-        <div class="single-widget condition">
+        <div class="single-widget condition d-none d-md-block">
             <h3>Condition</h3>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
@@ -80,7 +80,7 @@
         </div>
         <!-- End Single Widget -->
         <!-- Start Single Widget -->
-        <div class="single-widget banner">
+        <div class="single-widget banner d-none d-md-block">
             <h3>Advertisement</h3>
             <a href="javascript:void(0)">
                 <img src="assets/images/banner/banner.jpg" alt="#">
