@@ -17,13 +17,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
-    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/LineIcons.2.0.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/tiny-slider.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/glightbox.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
 </head>
 
 <body>
@@ -78,11 +77,12 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/tiny-slider.js"></script>
-    <script src="assets/js/glightbox.min.js"></script>
-    <script src="assets/js/main.js"></script>
+
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('assets/js/tiny-slider.js') }}"></script>
+    <script src="{{ asset('assets/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 
 </html>

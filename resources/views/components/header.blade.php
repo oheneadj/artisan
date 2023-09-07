@@ -4,8 +4,8 @@
              <div class="col-lg-12">
                  <div class="nav-inner">
                      <nav class="navbar navbar-expand-lg">
-                         <a class="navbar-brand" href="index.html">
-                             <img src="assets/images/logo/logo.svg" alt="Logo">
+                         <a class="navbar-brand" href="{{ route('home') }}">
+                             <h3>FashionAid</h3>
                          </a>
                          <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -41,16 +41,22 @@
                          </div> <!-- navbar collapse -->
                          <div class="login-button">
                              <ul>
-                                 <li>
-                                     <a href="{{ route('login') }}"><i class="lni lni-enter"></i> Login</a>
-                                 </li>
-                                 <li>
-                                     <a href="{{ route('register') }}"><i class="lni lni-user"></i> Register</a>
-                                 </li>
+                                 @auth
+                                     <li>
+                                         <a href="{{ route('login') }}"><i
+                                                 class="lni lni-enter @if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif"></i>
+                                             Login</a>
+                                     </li>
+                                     <li>
+                                         <a href="{{ route('register') }}"><i
+                                                 class="lni lni-user @if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif"></i>
+                                             Register</a>
+                                     </li>
+                                 @endauth
                              </ul>
                          </div>
                          <div class="button header-button">
-                             <a href="" class="btn">Post an Ad</a>
+                             <a href="{{ route('ad.create') }}" class="btn">Post an Ad</a>
                          </div>
                      </nav> <!-- navbar -->
                  </div>

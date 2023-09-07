@@ -21,11 +21,15 @@ use App\Http\Controllers\AdController;
 
 /**  Service Routes
  */
-Route::get('/ads', [AdController::class, 'index']);
-Route::get('/ads/{ad}', [AdController::class, 'show']);
-Route::post('/ads', [AdController::class, 'store']);
-Route::put('/ads', [AdController::class, 'update']);
-Route::delete('/ads', [AdController::class, 'destroy']);
+Route::get('/ads', [AdController::class, 'index'])->name('ads');
+Route::get('/ads/create', [AdController::class, 'create'])->name('ad.create');
+Route::get('/ads/{ad}', [AdController::class, 'show'])->name('ad.single');
+Route::post('/ads', [AdController::class, 'store'])->name('ad.new');
+Route::put('/ads', [AdController::class, 'update'])->name('ad.update');
+Route::delete('/ads', [AdController::class, 'destroy'])->name('ad.delete');
+
+Route::get('/ads/favourites', [AdController::class, 'index'])->name('ads.favourites');
+Route::get('/ads/bookmarked', [AdController::class, 'index'])->name('ads.bookmarked');
 
 /**
  * Shop Routes
@@ -42,8 +46,11 @@ Route::delete('/shops', [ShopController::class, 'destroy']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{user}', [UserController::class, 'show']);
 Route::post('/users', [UserController::class, 'store']);
-Route::put('/users', [UserController::class, 'update']);
+Route::put('/users', [UserController::class, 'update'])->name('edit.profile');
 Route::delete('/users', [UserController::class, 'destroy']);
+
+Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+Route::get('/messages', [UserController::class, 'messages'])->name('messages');
 
 /**
  * Auth Routes
