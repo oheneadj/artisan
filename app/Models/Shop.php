@@ -22,13 +22,28 @@ class Shop extends Model
      *
      * @var function<string, string>
      */
-    public function service()
+    public function ad()
     {
         return $this->hasMany(Ad::class);
     }
 
+    /**
+     * user
+     *
+     * @return void
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relationships
+     *
+     * @return void
+     */
+    public function category()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }

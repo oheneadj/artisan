@@ -15,7 +15,7 @@ class Ad extends Model
      * @var array<int, string>
      */
 
-    protected $fillable = ['user_id', 'name', 'price', 'shop_id'];
+    protected $fillable = ['user_id', 'name', 'price', 'shop_id', 'category_id'];
 
     /**
      * Relationships
@@ -25,5 +25,26 @@ class Ad extends Model
     public function shop()
     {
         $this->belongsTo(Shop::class);
+    }
+
+    /**
+     * Relationships
+     *
+     * @return void
+     */
+    public function category()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+
+    /**
+     * image
+     *
+     * @return void
+     */
+    public function image()
+    {
+        return $this->hasMany(Image::class);
     }
 }
