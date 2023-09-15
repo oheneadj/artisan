@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdController extends Controller
@@ -60,5 +61,19 @@ class AdController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function myAds()
+    {
+        return view('ads.my-ads', ['page_title' => 'My Ads']);
+    }
+
+    public function favourites()
+    {
+        return view('ads.favourite', ['page_title' => 'My Ads']);
+    }
+    public function bookmarked()
+    {
+        return view('ads.bookmarked', ['page_title' => 'My Ads']);
     }
 }

@@ -26,7 +26,13 @@ class PageController extends Controller
 
     public function faq()
     {
-        return view('pages.faq', ['page_title' => 'Frequently Asked Questions']);
+        return view(
+            'pages.faq',
+            [
+                'page_title' => 'Frequently Asked Questions',
+                'faqs' => Faq::all()
+            ]
+        );
     }
 
     /**

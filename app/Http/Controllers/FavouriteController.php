@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class FavouriteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return User::get();
+        //
     }
 
     /**
@@ -28,24 +27,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'username' => 'required',
-            'date_of_birth' => 'required',
-            'location' => 'required',
-            'card_type' => 'required',
-            'card_number' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        if (User::create($data)) {
-            return $data['first_name'];
-        } else {
-            return "Error creating service";
-        }
+        //
     }
 
     /**
@@ -78,15 +60,5 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function dashboard()
-    {
-        return view('user.dashboard', ['page_title' => 'Post Ad']);
-    }
-
-    public function profile()
-    {
-        return view('user.profile', ['page_title' => 'Profile']);
     }
 }
