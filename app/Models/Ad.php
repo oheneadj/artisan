@@ -15,7 +15,7 @@ class Ad extends Model
      * @var array<int, string>
      */
 
-    protected $fillable = ['user_id', 'name', 'price', 'shop_id', 'category_id'];
+    protected $fillable = ['user_id', 'name', 'slug', 'price', 'shop_id', 'category_id'];
 
     /**
      * Relationships

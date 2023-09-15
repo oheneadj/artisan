@@ -1,36 +1,145 @@
 <x-layout>
-    <x-breadcrumbs :message="$page_title">
-
-    </x-breadcrumbs>
-    <section class="about-us section">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-6 col-md-12 col-12">
-                    <div class="content-left wow fadeInLeft" data-wow-delay=".3s"
-                        style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
-                        <img src="assets/images/about/choose-left.jpg" alt="#">
-                        <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&amp;fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM"
-                            class="glightbox video"><i class="lni lni-play"></i></a>
+    <x-breadcrumbs :message="$page_title" />
+    <x-user-layout>
+        <div class="details-lists">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-12">
+                    <!-- Start Single List -->
+                    <div class="single-list">
+                        <div class="list-icon">
+                            <i class="lni lni-checkmark-circle"></i>
+                        </div>
+                        <h3>
+                            340
+                            <span>Total Ad Posted</span>
+                        </h3>
                     </div>
+                    <!-- End Single List -->
                 </div>
-                <div class="col-lg-6 col-md-12 col-12">
-                    <!-- content-1 start -->
-                    <div class="content-right wow fadeInRight" data-wow-delay=".5s"
-                        style="visibility: hidden; animation-delay: 0.5s; animation-name: none;">
-                        <!-- Heading -->
-                        <span class="sub-heading">About</span>
-                        <h2>
-                            About Our Company</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi aliquip ex ea commodo consequat.</p>
-                        <h3>What We Do</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <!-- End Heading -->
+                <div class="col-lg-4 col-md-4 col-12">
+                    <!-- Start Single List -->
+                    <div class="single-list two">
+                        <div class="list-icon">
+                            <i class="lni lni-bolt"></i>
+                        </div>
+                        <h3>
+                            23
+                            <span>Featured Ads </span>
+                        </h3>
                     </div>
+                    <!-- End Single List -->
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <!-- Start Single List -->
+                    <div class="single-list three">
+                        <div class="list-icon">
+                            <i class="lni lni-emoji-sad"></i>
+                        </div>
+                        <h3>
+                            45
+                            <span>Expired Ads </span>
+                        </h3>
+                    </div>
+                    <!-- End Single List -->
                 </div>
             </div>
         </div>
-    </section>
+        <!-- End Details Lists -->
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12">
+                <!-- Start Activity Log -->
+                <div class="activity-log dashboard-block">
+                    <h3 class="block-title">My Activity Log</h3>
+                    <ul>
+                        <li>
+                            <div class="log-icon">
+                                <i class="lni lni-alarm"></i>
+                            </div>
+                            <a href="javascript:void(0)" class="title">Your Profile Updated!</a>
+                            <span class="time">12 Minutes Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                        <li>
+                            <div class="log-icon">
+                                <i class="lni lni-alarm"></i>
+                            </div>
+                            <a href="javascript:void(0)" class="title">You change your password</a>
+                            <span class="time">59 Minutes Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                        <li>
+                            <div class="log-icon">
+                                <i class="lni lni-alarm"></i>
+                            </div>
+                            <a href="javascript:void(0)" class="title">Your ads approved!</a>
+                            <span class="time">5 Hours Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                        <li>
+                            <div class="log-icon">
+                                <i class="lni lni-alarm"></i>
+                            </div>
+                            <a href="javascript:void(0)" class="title">You submit a new ads</a>
+                            <span class="time">8 hours Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                        <li>
+                            <div class="log-icon">
+                                <i class="lni lni-alarm"></i>
+                            </div>
+                            <a href="javascript:void(0)" class="title">You subscribe as a pro user!</a>
+                            <span class="time">1 day Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Activity Log -->
+            </div>
+            <div class="col-lg-6 col-md-12 col-12">
+                <!-- Start Recent Items -->
+                <div class="recent-items dashboard-block">
+                    <h3 class="block-title">Recent Ads</h3>
+                    <ul>
+                        <li>
+                            <div class="image">
+                                <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item1.jpg"
+                                        alt="#"></a>
+                            </div>
+                            <a href="javascript:void(0)" class="title">iPhone 11 Pro Max</a>
+                            <span class="time">12 Minutes Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                        <li>
+                            <div class="image">
+                                <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item2.jpg"
+                                        alt="#"></a>
+                            </div>
+                            <a href="javascript:void(0)" class="title">Polaris 600 Assault 144</a>
+                            <span class="time">5 days Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                        <li>
+                            <div class="image">
+                                <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item3.jpg"
+                                        alt="#"></a>
+                            </div>
+                            <a href="javascript:void(0)" class="title">Brand New Bagpack</a>
+                            <span class="time">1 week Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                        <li>
+                            <div class="image">
+                                <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item4.jpg"
+                                        alt="#"></a>
+                            </div>
+                            <a href="javascript:void(0)" class="title">Honda Civic VTi 2023</a>
+                            <span class="time">3 week Ago</span>
+                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Recent Items -->
+            </div>
+        </div>
+    </x-user-layout>
 </x-layout>

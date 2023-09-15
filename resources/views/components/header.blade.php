@@ -41,18 +41,18 @@
                          </div> <!-- navbar collapse -->
                          <div class="login-button">
                              <ul>
-                                 @auth
-                                     <li>
-                                         <a href="{{ route('login') }}"><i
-                                                 class="lni lni-enter @if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif"></i>
-                                             Login</a>
-                                     </li>
-                                     <li>
-                                         <a href="{{ route('register') }}"><i
-                                                 class="lni lni-user @if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif"></i>
-                                             Register</a>
-                                     </li>
-                                 @endauth
+
+                                 <li>
+                                     <a href="{{ route('login') }}"><i
+                                             class="lni lni-enter @if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif"></i>
+                                         Login</a>
+                                 </li>
+                                 <li>
+                                     <a href="{{ route('register') }}"><i
+                                             class="lni lni-user @if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif"></i>
+                                         Register</a>
+                                 </li>
+
                              </ul>
                          </div>
                          <div class="button header-button">

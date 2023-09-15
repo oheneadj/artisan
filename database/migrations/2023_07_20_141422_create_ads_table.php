@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('slug');
             $table->string('price');
-            //$table->foreignId('shop_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')
+                ->constrained('categories');
+            $table->foreignId('shop_id')
+                ->constrained('shops')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
