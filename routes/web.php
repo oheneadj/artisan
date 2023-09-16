@@ -72,13 +72,12 @@ Route::delete('/services', [AuthController::class, 'destroy']);
 /**
  * Booking Routes
  */
-Route::get('/login', [BookingController::class, 'index'])->name('login');
-Route::get('/logout', [BookingController::class, 'show'])->name('logout');
-Route::get('/register', [AuthController::class, 'store'])->name('register');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store'])->name('register');
-Route::post('/reset-password', [BookingController::class, 'store'])->name('reset-password');
-Route::put('/reset-password', [BookingController::class, 'update']);
-Route::delete('/services', [BookingController::class, 'destroy']);
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
 
 
 /**
