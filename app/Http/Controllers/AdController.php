@@ -13,7 +13,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        //
+        return view('ads.index', ["ads" => Ad::all()]);
     }
 
     /**

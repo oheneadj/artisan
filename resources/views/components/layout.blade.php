@@ -75,9 +75,7 @@
     <a href="{{ request()->url() }}#" class="scroll-top btn-hover">
         <i class="lni lni-chevron-up"></i>
     </a>
-
     <!-- ========================= JS here ========================= -->
-
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('assets/js/tiny-slider.js') }}"></script>
