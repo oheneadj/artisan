@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Ad Listing Grid - ClassiGrids Classified Ads and Listing Website Template</title>
+    <title>Fashion Aid - Ads and Listing Website </title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
@@ -72,7 +72,7 @@
     <!--/ End Footer Area -->
 
     <!-- ========================= scroll-top ========================= -->
-    <a href="item-listing-grid.html#" class="scroll-top btn-hover">
+    <a href="{{ request()->url() }}#" class="scroll-top btn-hover">
         <i class="lni lni-chevron-up"></i>
     </a>
 
@@ -83,6 +83,25 @@
     <script src="{{ asset('assets/js/tiny-slider.js') }}"></script>
     <script src="{{ asset('assets/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+        // Items Image Gallery
+        const current = document.getElementById("current");
+        const opacity = 0.6;
+        const imgs = document.querySelectorAll(".img");
+        imgs.forEach((img) => {
+            img.addEventListener("click", (e) => {
+                //reset opacity
+                imgs.forEach((img) => {
+                    img.style.opacity = 1;
+                });
+                current.src = e.target.src;
+                //adding class
+                //current.classList.add("fade-in");
+                //opacity
+                e.target.style.opacity = opacity;
+            });
+        });
+    </script>
 </body>
 
 </html>

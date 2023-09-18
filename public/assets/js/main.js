@@ -4,21 +4,18 @@ Author: GrayGrids
 */
 
 (function () {
+    "use strict";
 
-	"use strict";
+    //===== Prealoder
 
-	//===== Prealoder
-
-	window.onload = function () {
-		window.setTimeout(fadeout, 200);
-	}
-
+    window.onload = function () {
+        window.setTimeout(fadeout, 200);
+    };
 
     function fadeout() {
-        document.querySelector('.preloader').style.opacity = '0';
-        document.querySelector('.preloader').style.display = 'none';
+        document.querySelector(".preloader").style.opacity = "0";
+        document.querySelector(".preloader").style.display = "none";
     }
-
 
     /*=====================================
     Sticky
@@ -35,7 +32,10 @@ Author: GrayGrids
 
         // show or hide the back-top-top button
         var backToTo = document.querySelector(".scroll-top");
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        if (
+            document.body.scrollTop > 50 ||
+            document.documentElement.scrollTop > 50
+        ) {
             backToTo.style.display = "flex";
         } else {
             backToTo.style.display = "none";
@@ -43,13 +43,11 @@ Author: GrayGrids
     };
 
     //===== Mobile-menu-btn
-	let navbarToggler = document.querySelector(".mobile-menu-btn");
-	navbarToggler.addEventListener('click', function () {
-		navbarToggler.classList.toggle("active");
-	});
-    
+    let navbarToggler = document.querySelector(".mobile-menu-btn");
+    navbarToggler.addEventListener("click", function () {
+        navbarToggler.classList.toggle("active");
+    });
+
     // WOW active
     new WOW().init();
-    
 })();
-

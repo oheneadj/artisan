@@ -5,7 +5,8 @@
                  <div class="nav-inner">
                      <nav class="navbar navbar-expand-lg">
                          <a class="navbar-brand" href="{{ route('home') }}">
-                             <h3>FashionAid</h3>
+                             <h4>FashionAid</h4>
+                             {{-- <img src="assets/images/logo/fashionaid_logo.png" alt="Logo"> --}}
                          </a>
                          <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -41,7 +42,6 @@
                          </div> <!-- navbar collapse -->
                          <div class="login-button">
                              <ul>
-
                                  <li>
                                      <a href="{{ route('login') }}"><i
                                              class="lni lni-enter @if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif"></i>
@@ -52,7 +52,6 @@
                                              class="lni lni-user @if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif"></i>
                                          Register</a>
                                  </li>
-
                              </ul>
                          </div>
                          <div class="button header-button">

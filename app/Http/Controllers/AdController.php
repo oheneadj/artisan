@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,15 @@ class AdController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Ad $ad)
     {
-        //
+        return view(
+            'ads.show-ad',
+            [
+                'page_title' => 'Post Ad',
+                'ad' => $ad,
+            ]
+        );
     }
 
     /**
