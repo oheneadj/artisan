@@ -9,7 +9,7 @@
          <div class="content">
              <a href="javascript:void(0)" class="tag">{{ $ad->name }}</a>
              <h3 class="title">
-                 <a href="item-details.html">Apple Iphone X</a>
+                 <a href="{{ route('ad.single', $ad->id) }}">Apple Iphone X</a>
              </h3>
              <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
                      </i>Boston</a></p>

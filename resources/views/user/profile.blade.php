@@ -1,7 +1,6 @@
 <x-layout>
     <x-breadcrumbs :message="$page_title" />
     <x-user-layout>
-
         <!-- Start Profile Settings Area -->
         <div class="dashboard-block profile-settings-block mt-0">
             <h3 class="block-title">Profile Settings</h3>
