@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return Shop::get();
+        return view('ads.index', ["ads" => Ad::all()]);
     }
 
     /**

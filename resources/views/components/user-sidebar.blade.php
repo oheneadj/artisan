@@ -1,8 +1,8 @@
  <div class="dashboard-sidebar">
      <div class="user-image">
-         <img src="assets/images/dashboard/user-image.jpg" alt="#">
-         <h3>Steve Aldridge
-             <span><a href="javascript:void(0)">@username</a></span>
+         <img src="{{ asset('assets/images/dashboard/user-image.jpg') }}" alt="#">
+         <h3>{{ auth()->user()->name }}
+             <span><a href="javascript:void(0)">{{ '@' . auth()->user()->username }}</a></span>
          </h3>
      </div>
      <div class="dashboard-menu">
@@ -12,8 +12,10 @@
              <li><a class="@if (Route::current()->getName() == 'profile') {{ 'active' }} @endif" href="{{ route('profile') }}"><i
                          class="lni lni-pencil-alt"></i>Profile</a>
              </li>
-             <li><a class="@if (Route::current()->getName() == 'my.ads') {{ 'active' }} @endif" href="{{ route('my.ads') }}"><i
-                         class="lni lni-bolt-alt"></i> My Ads</a></li>
+             <li><a class="@if (Route::current()->getName() == 'show.shops') {{ 'active' }} @endif"
+                     href="{{ route('show.shops') }}"><i class="lni lni-printer"></i>My Shop</a></li>
+             <li><a class="@if (Route::current()->getName() == 'my.ads') {{ 'active' }} @endif"
+                     href="{{ route('my.ads') }}"><i class="lni lni-bolt-alt"></i> My Ads</a></li>
              <li><a class="@if (Route::current()->getName() == 'ads.favourites') {{ 'active' }} @endif"
                      href="{{ route('ads.favourites') }}"><i class="lni lni-heart"></i> Favourite ads</a></li>
              <li><a class="@if (Route::current()->getName() == 'ad.create') {{ 'active' }} @endif"
@@ -24,7 +26,7 @@
              <li><a class="@if (Route::current()->getName() == 'messages') {{ 'active' }} @endif"
                      href="{{ route('messages') }}"><i class="lni lni-envelope"></i> Messages</a></li>
              <li><a href=""><i class="lni lni-trash"></i> Close account</a></li>
-             <li><a href=""><i class="lni lni-printer"></i> Invoice</a></li>
+
          </ul>
          <div class="button">
              <a class="btn" href="javascript:void(0)">Logout</a>

@@ -3,7 +3,7 @@
         <div class="container mt-5">
             <div class="row">
                 {{-- Sidebar --}}
-                <x-sidebar />
+                <x-sidebar :categories='$ads' />
                 {{-- End of Sidebar --}}
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="category-grid-list">
@@ -19,11 +19,9 @@
                                         aria-labelledby="nav-grid-tab">
                                         <div class="row">
                                             {{-- Ad Cards --}}
-
                                             @foreach ($ads as $ad)
                                                 <x-ad-card-grid :ad="$ad" />
                                             @endforeach
-
                                             {{-- End Add Cards --}}
                                         </div>
                                         <div class="row">

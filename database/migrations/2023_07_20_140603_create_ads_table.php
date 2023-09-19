@@ -17,11 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('price');
-            $table->foreignId('category_id')
-                ->constrained('categories');
-            $table->foreignId('shop_id')
-                ->constrained('shops')
-                ->onDelete('cascade');
             $table->timestamps();
         });
     }

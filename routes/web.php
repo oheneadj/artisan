@@ -38,11 +38,11 @@ Route::get('/my-ads', [AdController::class, 'myAds'])->name('my.ads');
 /**
  * Shop Routes
  */
-Route::get('/shops', [ShopController::class, 'index']);
-Route::get('/shops/{shop}', [ShopController::class, 'show']);
-Route::post('/shops', [ShopController::class, 'store']);
-Route::put('/shops', [ShopController::class, 'update']);
-Route::delete('/shops', [ShopController::class, 'destroy']);
+Route::get('/shops', [ShopController::class, 'index'])->name('shops');
+Route::get('/shops/shop', [ShopController::class, 'show'])->name('show.shops');
+Route::post('/shops', [ShopController::class, 'store'])->name('store.shop');
+Route::put('/shops', [ShopController::class, 'update'])->name('update.shop');
+Route::delete('/shops', [ShopController::class, 'destroy'])->name('destroy.shop');
 
 /**
  * User Routes
