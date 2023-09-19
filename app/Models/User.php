@@ -3,10 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -18,9 +19,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'username',
+        'gender',
         'date_of_birth',
         'location',
         'card_type',
@@ -53,6 +54,16 @@ class User extends Authenticatable
         'number_verfied_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function generateUserName($name)
+    {
+        $username = Str::lower(Str::slug($name));
+        if (User::where('username', '=', $username)->exists()) {
+            $uniqueUserName = $username . '-' . Str::lower(Str::random(4));
+            $username = $this->generateUserName($uniqueUserName);
+        }
+        return $username;
+    }
 
     /**
      * Relationships

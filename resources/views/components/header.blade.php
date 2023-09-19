@@ -22,7 +22,7 @@
                                          class="@if (Route::current()->getName() == 'home') {{ 'active' }} @endif">Home</a>
                                  </li>
                                  <li class="nav-item">
-                                     <a href="{{ route('home') }}" aria-label="Toggle navigation"
+                                     <a href="{{ route('shops') }}" aria-label="Toggle navigation"
                                          class="@if (Route::current()->getName() == 'shops') {{ 'active' }} @endif">All
                                          Shops</a>
                                  </li>
@@ -40,20 +40,23 @@
                                  </li>
                              </ul>
                          </div> <!-- navbar collapse -->
-                         <div class="login-button">
-                             <ul>
-                                 <li>
-                                     <a href="{{ route('login') }}"><i
-                                             class="lni lni-enter @if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif"></i>
-                                         Login</a>
-                                 </li>
-                                 <li>
-                                     <a href="{{ route('register') }}"><i
-                                             class="lni lni-user @if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif"></i>
-                                         Register</a>
-                                 </li>
-                             </ul>
-                         </div>
+                         @guest
+                             <div class="login-button">
+                                 <ul>
+                                     <li>
+                                         <a href="{{ route('login') }}"><i
+                                                 class="lni lni-enter @if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif"></i>
+                                             Login</a>
+                                     </li>
+                                     <li>
+                                         <a href="{{ route('register') }}"><i
+                                                 class="lni lni-user @if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif"></i>
+                                             Register</a>
+                                     </li>
+                                 </ul>
+                             </div>
+                         @endguest
+
                          <div class="button header-button">
                              <a href="{{ route('ad.create') }}" class="btn">Post an Ad</a>
                          </div>

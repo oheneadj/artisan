@@ -13,35 +13,14 @@
         <div class="single-widget d-none d-md-block">
             <h3>All Categories</h3>
             <ul class="list">
-                <li>
-                    <a href="javascript:void(0)"><i class="lni lni-dinner"></i> Hotel &
-                        Travels<span>15</span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><i class="lni lni-control-panel"></i> Services
-                        <span>20</span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><i class="lni lni-bullhorn"></i> Marketing
-                        <span>55</span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><i class="lni lni-home"></i> Real
-                        Estate<span>35</span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><i class="lni lni-bolt"></i> Electronics
-                        <span>60</span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><i class="lni lni-tshirt"></i> Dress & Clothing
-                        <span>55</span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><i class="lni lni-diamond-alt"></i> Jewelry &
-                        Accessories
-                        <span>45</span></a>
-                </li>
+
+                @foreach ($categories as $category)
+                    <li>
+                        <a href="{{ $category->slug }}"><i class="{{ $category->icon }}"></i>
+                            {{ $category->name }}<span>15</span></a>
+                    </li>
+                @endforeach
+
             </ul>
         </div>
         <!-- End Single Widget -->

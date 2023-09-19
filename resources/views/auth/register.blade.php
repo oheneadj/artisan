@@ -4,24 +4,53 @@
             <div class="row mt-10">
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
                     <div class="form-head mt-10">
-                        <h4 class="title">Login</h4>
-                        <form action="login.html#!" method="post">
+                        <h4 class="title">Create Account</h4>
+                        <form action="{{ route('register') }}" method="post">
+                            @csrf
                             <div class="form-group">
-                                <label>Name</label>
-                                <input name="name" type="text" placeholder=" Eg. Nana Adjei">
+                                <label>Full Name</label>
+                                <input name="name" id="name" type="text" placeholder=" Eg. Nana Adjei">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select name="gender" id="">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                @error('gender')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input name="date_of_birth" type="date" placeholder=" Eg. Nana Adjei">
+                                @error('date_of_birth')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Telephone Number</label>
-                                <input name="phone-number" type="text" placeholder="Eg. 024XXXXXXXX">
+                                <input name="phone_number" type="text"
+                                    @error('phone_number') {{ 'is-invalid' }} @enderror" placeholder="Eg. 024XXXXXXXX">
+                                @error('phone_number')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input name="email" type="text" placeholder="">
+                                <input name="password" id="passwordInput" type="password" placeholder="">
+                                <small id="passwordVisibility">Show Password</small>
                             </div>
+
                             <div class="form-group">
                                 <label>Confirm Password</label>
-                                <input name="password" type="text">
+                                <input name="password_confirmation" id="passwordConfirmInput" type="password">
+
                             </div>
+
                             <div class="check-and-pass">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 col-md-6 col-12">
