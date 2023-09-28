@@ -19,9 +19,23 @@ class AuthController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function authenticate()
+    public function authenticate(Request $request)
     {
-        //
+        $formFields = $request->validate([
+
+            'phone_number' => ['required', 'numeric'],
+            'password' => ['required']
+        ]);
+
+        if (auth()->attempt($formFields)) {
+            $request->session()->regenerate();
+            return redirect('/')
+                ->with('success', 'You are logged in successfully');
+        }
+
+        return back()
+            ->withErrors(['email' => 'Invalid Credentials'])
+            ->onlyInput('email');
     }
 
     /**
@@ -82,6 +96,14 @@ class AuthController extends Controller
      */
     public function logout(string $id)
     {
-        //
+        // remove auth information from user session
+        auth()->logout();
+
+        // invalidate user session and regenerate csrf token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // redirect to / with flash message
+        return redirect('/')->with('success', 'You have been logged out');
     }
 }

@@ -5,19 +5,19 @@
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
                     <div class="form-head mt-10">
                         <h4 class="title">Login</h4>
-                        <form action="login.html#!" method="post">
+                        <form action="{{route('authenticate')}}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                <input name="email" type="email" placeholder="Eg. 024xxxxxxxxx">
+                                <input name="phone_number" value="{{old('phone_number')}}"  type="text" placeholder="Eg. 024xxxxxxxxx" required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input name="password" type="password" placeholder="">
-                                <small class="">Make sure your password is unique and at least 8
-                                    characters</small>
+                                <input name="password" value="{{old('password')}}" type="password" placeholder="*************">
+                                 @error('name')
+                                  <small class="text-danger">{{ $message }}</small>
+                                @enderror                              
                             </div>
-
                             <div class="check-and-pass">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 col-md-6 col-12">

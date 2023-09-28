@@ -21,19 +21,37 @@ use App\Http\Controllers\AdController;
 
 /**  Ads Routes
  */
-Route::get('/ads', [AdController::class, 'index'])->name('ads');
-Route::get('/ads/create', [AdController::class, 'create'])->name('ad.create');
-Route::get('/ads/{ad}', [AdController::class, 'show'])->name('ad.single');
-Route::post('/ads', [AdController::class, 'store'])->name('ad.new');
-Route::put('/ads', [AdController::class, 'update'])->name('ad.update');
-Route::delete('/ads', [AdController::class, 'destroy'])->name('ad.delete');
+Route::get('/ads', [AdController::class, 'index'])
+    ->name('ads');
+Route::get('/ads/create', [AdController::class, 'create'])
+    ->name('ad.create')
+    ->middleware('auth');
+Route::get('/ads/{ad}', [AdController::class, 'show'])
+    ->name('ad.single');
+Route::post('/ads', [AdController::class, 'store'])
+    ->name('ad.new')
+    ->middleware('auth');
+Route::put('/ads', [AdController::class, 'update'])
+    ->name('ad.update')
+    ->middleware('auth');
+Route::delete('/ads', [AdController::class, 'destroy'])
+    ->name('ad.delete')
+    ->middleware('auth');
 
 //Replace user with {user} in production
-Route::get('/ads/user/favourites', [AdController::class, 'favourites'])->name('ads.favourites');
-Route::get('/ads/user/bookmarked', [AdController::class, 'bookmarked'])->name('ads.bookmarked');
+Route::get('/ads/user/favourites', [AdController::class, 'favourites'])
+    ->name('ads.favourites')
+    ->middleware('auth');
+Route::get('/ads/user/bookmarked', [AdController::class, 'bookmarked'])
+    ->name('ads.bookmarked')
+    ->middleware('auth');
 
-Route::get('/ads/invoice', [AdController::class, 'invoice'])->name('invoice');
-Route::get('/my-ads', [AdController::class, 'myAds'])->name('my.ads');
+Route::get('/ads/invoice', [AdController::class, 'invoice'])
+    ->name('invoice')
+    ->middleware('auth');
+Route::get('/my-ads', [AdController::class, 'myAds'])
+    ->name('my.ads')
+    ->middleware('auth');
 
 /**
  * Shop Routes
@@ -47,37 +65,45 @@ Route::delete('/shops', [ShopController::class, 'destroy'])->name('destroy.shop'
 /**
  * User Routes
  */
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{user}', [UserController::class, 'show']);
-Route::post('/users', [UserController::class, 'store']);
-Route::put('/users', [UserController::class, 'update'])->name('edit.profile');
-Route::delete('/users', [UserController::class, 'destroy']);
 
-Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-Route::get('/messages', [UserController::class, 'messages'])->name('messages');
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{user}', [UserController::class, 'show']);
+    Route::post('/users', [UserController::class, 'store']);
+    Route::put('/users', [UserController::class, 'update'])->name('edit.profile');
+    Route::delete('/users', [UserController::class, 'destroy']);
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/messages', [UserController::class, 'messages'])->name('messages');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+});
+
+
 
 
 /**
  * Auth Routes
  */
-Route::get('/login', [AuthController::class, 'index']);
-Route::get('/logout', [AuthController::class, 'show']);
-Route::post('/register', [AuthController::class, 'store']);
-Route::post('/reset-password', [AuthController::class, 'store']);
-Route::put('/reset-password', [AuthController::class, 'update']);
-Route::delete('/services', [AuthController::class, 'destroy']);
-
-
-/**
- * Booking Routes
- */
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'store'])->name('register');
-Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
-Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
+Route::get('/login', [AuthController::class, 'login'])
+    ->name('login')
+    ->middleware('guest');
+Route::post('/authenticate', [AuthController::class, 'authenticate'])
+    ->name('authenticate')
+    ->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('logout')
+    ->middleware('auth');
+Route::get('/register', [AuthController::class, 'register'])
+    ->name('register')
+    ->middleware('guest');
+Route::post('/register', [AuthController::class, 'store'])
+    ->name('register')
+    ->middleware('guest');
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])
+    ->name('forgot-password')
+    ->middleware('guest');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])
+    ->name('reset-password')
+    ->middleware('guest');
 
 
 /**

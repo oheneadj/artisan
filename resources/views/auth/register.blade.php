@@ -11,24 +11,25 @@
                                 <label>Full Name</label>
                                 <input name="name" id="name" type="text" placeholder=" Eg. Nana Adjei">
                                 @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Gender</label>
-                                <select name="gender" id="">
+                                <select class="select-form" name="gender" id="">
+                                    <option value="">Select your gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
                                 @error('gender')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Date of Birth</label>
                                 <input name="date_of_birth" type="date" placeholder=" Eg. Nana Adjei">
                                 @error('date_of_birth')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
@@ -36,19 +37,24 @@
                                 <input name="phone_number" type="text"
                                     @error('phone_number') {{ 'is-invalid' }} @enderror" placeholder="Eg. 024XXXXXXXX">
                                 @error('phone_number')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input name="password" id="passwordInput" type="password" placeholder="">
+                                <input name="password" id="passwordInput" type="password" placeholder="" required>
                                 <small id="passwordVisibility">Show Password</small>
+                                 @error('phone_number')
+                                     <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label>Confirm Password</label>
-                                <input name="password_confirmation" id="passwordConfirmInput" type="password">
-
+                                <input name="password_confirmation" id="passwordConfirmInput" type="password" required>
+                                @error('phone_number')
+                                     <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="check-and-pass">
