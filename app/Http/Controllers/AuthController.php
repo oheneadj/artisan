@@ -60,7 +60,7 @@ class AuthController extends Controller
             'password' => 'required | confirmed | min:8'
         ]);
 
-        // Hash Password
+        //Hash Password
         $formFields['password'] = bcrypt($formFields['password']);
 
         $userObject = new User;

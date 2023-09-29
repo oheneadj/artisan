@@ -79,7 +79,13 @@ class AdController extends Controller
 
     public function myAds()
     {
-        return view('ads.my-ads', ['page_title' => 'My Ads']);
+        return view(
+            'ads.my-ads',
+            [
+                'page_title' => 'My Ads',
+                "ads" => Ad::where('user_id', auth()->user()->id),
+            ]
+        );
     }
 
     public function favourites()

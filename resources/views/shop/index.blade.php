@@ -2,10 +2,10 @@
     <x-breadcrumbs :message="$page_title" />
     <x-user-layout>
         <div class="dashboard-block mt-0">
-            <h3 class="block-title">Create Your Shop</h3>
+            <h3 class="block-title">Your Shop</h3>
             <div class="inner-block">
                 <!-- Start Post Ad Tab -->
-                @if(auth()->user()->shop() == '')
+                @if($shop !== null)
                    <div class="post-ad-tab">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -41,8 +41,14 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>Add Title*</label>
-                                                <input name="title" type="text" placeholder="Enter Title">
+                                                <label>Shop Name*</label>
+                                                <input name="title" value="{{$shop->name}}" type="text" placeholder="Enter Title">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Shop Location*</label>
+                                                <input name="location" value="{{$shop->location}}" type="text" placeholder="Enter Location">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -325,10 +331,9 @@
                 @else
                 <div class='d-flex justify-content-center'> 
                     <div class="button">
-                        <a href="{{route('create.shop')}}" class="btn ">Create a Shop</a>             
+                        <a href="{{route('create.shop')}}" class="btn">Create a Shop</a>             
                     </div>
                 </div>
-               
                 @endif
                 <!-- End Post Ad Tab -->
             </div>

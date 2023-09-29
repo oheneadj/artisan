@@ -4,6 +4,14 @@
 
         <div class="dashboard-block mt-0">
             <h3 class="block-title">My Ads</h3>
+            
+            @if($ads != '')
+            <div class='d-flex justify-content-center'> 
+                    <div class="button">
+                        <a href="{{route('create.shop')}}" class="btn ">Create a Shop</a>             
+                    </div>
+            </div>
+            @else
             <nav class="list-nav">
                 <ul>
                     <li class="active"><a href="javascript:void(0)">All Ads <span>42</span></a></li>
@@ -158,6 +166,7 @@
                 </div>
                 <!--/ End Pagination -->
             </div>
+            @endif
             <!-- End Items Area -->
         </div>
     </x-user-layout>

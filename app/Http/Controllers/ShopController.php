@@ -14,7 +14,12 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('ads.index', ["ads" => Ad::all()]);
+        return view(
+            "ads.index",
+            [
+                "ads" => Ad::all()
+            ]
+        );
     }
 
     /**
@@ -85,10 +90,11 @@ class ShopController extends Controller
 
     public function user_shop()
     {
+
         return view(
             'shop.index',
             [
-                "ads" => Ad::all(),
+                "shop" => Shop::where('user_id', auth()->user()->id)->first(),
                 'page_title' => "My Shop"
             ]
         );
