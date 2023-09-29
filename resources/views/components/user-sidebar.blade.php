@@ -13,7 +13,7 @@
                          class="lni lni-pencil-alt"></i>Profile</a>
              </li>
              <li><a class="@if (Route::current()->getName() == 'show.shops') {{ 'active' }} @endif"
-                     href="{{ route('show.shops') }}"><i class="lni lni-printer"></i>My Shop</a></li>
+                     href="{{ route('user.shop') }}"><i class="lni lni-printer"></i>My Shop</a></li>
              <li><a class="@if (Route::current()->getName() == 'my.ads') {{ 'active' }} @endif"
                      href="{{ route('my.ads') }}"><i class="lni lni-bolt-alt"></i> My Ads</a></li>
              <li><a class="@if (Route::current()->getName() == 'ads.favourites') {{ 'active' }} @endif"

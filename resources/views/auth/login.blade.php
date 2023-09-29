@@ -10,10 +10,13 @@
                             <div class="form-group">
                                 <label>Phone Number</label>
                                 <input name="phone_number" value="{{old('phone_number')}}"  type="text" placeholder="Eg. 024xxxxxxxxx" required>
+                                 @error('phone_number')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input name="password" value="{{old('password')}}" type="password" placeholder="*************">
+                                <input name="password" value="{{old('password')}}" type="password" placeholder="">
                                  @error('name')
                                   <small class="text-danger">{{ $message }}</small>
                                 @enderror                              

@@ -44,13 +44,13 @@
                              <div class="login-button">
                                  <ul>
                                      <li>
-                                         <a href="{{ route('login') }}"><i
-                                                 class="lni lni-enter @if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif"></i>
+                                         <a class="@if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif" href="{{ route('login') }}"><i
+                                                 class="lni lni-enter"></i>
                                              Login</a>
                                      </li>
                                      <li>
-                                         <a href="{{ route('register') }}"><i
-                                                 class="lni lni-user @if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif"></i>
+                                         <a class="@if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif" href="{{ route('register') }}"><i
+                                                 class="lni lni-user"></i>
                                              Register</a>
                                      </li>
                                  </ul>

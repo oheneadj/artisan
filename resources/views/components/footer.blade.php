@@ -71,8 +71,8 @@
                         <div class="single-footer f-contact">
                             <h3>Contact</h3>
                             <ul>
-                                <li>23 New Design Str, Lorem Upsum 10<br> Hudson Yards, USA</li>
-                                <li>Tel. +(123) 1800-567-8990 <br> Mail. support@classigrids.com</li>
+                                <li>Alhaji Sammo Road<br> Nkoranza, Bono East</li>
+                                <li>Tel. +(123) 1800-567-8990 <br> Mail. support@fashionaid.com</li>
                             </ul>
                         </div>
                         <!-- End Single Widget -->
@@ -95,8 +95,8 @@
                                     <li><a href="javascript:void(0)">Site Map</a></li>
                                     <li><a href="javascript:void(0)">Information</a></li>
                                 </ul>
-                                <p class="copyright-text">Designed and Developed by <a href="https://graygrids.com/"
-                                        rel="nofollow" target="_blank">GrayGrids</a>
+                                <p class="copyright-text">Designed and Developed by <a href="https://oheneadjei.com/"
+                                        rel="nofollow" target="_blank">Ohene Adjei</a>
                                 </p>
                                 <ul class="footer-social">
                                     <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>

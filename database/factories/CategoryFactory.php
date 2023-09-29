@@ -20,7 +20,7 @@ class CategoryFactory extends Factory
             'icon' => 'lni lni-dinner',
             'name' => fake()->name(),
             'slug' => fake()->slug(),
-            'description' => fake()->paragraph(),
+            'description' => fake()->sentence(),
         ];
     }
 }

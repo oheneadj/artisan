@@ -5,7 +5,7 @@
             <h3 class="block-title">Create Your Shop</h3>
             <div class="inner-block">
                 <!-- Start Post Ad Tab -->
-                @if(auth()->user()->shop() == '')
+               
                    <div class="post-ad-tab">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -21,7 +21,7 @@
                                 aria-controls="nav-item-details" aria-selected="false">
                                 <span class="serial">02</span>
                                 Step
-                                <span class="sub-title">Ad Details</span>
+                                <span class="sub-title">Contact Details</span>
                             </button>
                             <button class="nav-link" id="nav-user-info-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-user-info" type="button" role="tab"
@@ -36,37 +36,78 @@
                         <div class="tab-pane fade show active" id="nav-item-info" role="tabpanel"
                             aria-labelledby="nav-item-info-tab">
                             <!-- Start Post Ad Step One Content -->
-                            <div class="step-one-content">
-                                <form class="default-form-style" method="post" action="post-item.html#">
+                            <div class="step-two-content">
+                                 <form class="default-form-style" method="post" action="{{route('store.shop')}}">
+                                     @csrf
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>Add Title*</label>
-                                                <input name="title" type="text" placeholder="Enter Title">
-                                            </div>
+                                                <label>Shop Name</label>
+                                                <input name="name" value="{{old('name')}}" type="text" placeholder="Enter Shop name">
+                                            @error('name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>Category*</label>
+                                                <label>Shop Location</label>
+                                                <input name="location" value="{{old('location')}}" type="text" placeholder="Enter Shop Location">
+                                            @error('location')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror 
+                                            </div>
+                                        </div>
+                                        {{-- <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Select Shop Type*</label>
                                                 <div class="selector-head">
                                                     <span class="arrow"><i class="lni lni-chevron-down"></i></span>
                                                     <select class="user-chosen-select">
-                                                        <option value="none">Select a Category
+                                                        <option value="none">Select an option
                                                         </option>
-                                                        <option value="none">Mobile Phones</option>
-                                                        <option value="none">Electronics</option>
-                                                        <option value="none">Computers</option>
-                                                        <option value="none">Headphones</option>
-                                                        <option value="none">Furnitures</option>
-                                                        <option value="none">Books</option>
+                                                        <option value="hair dresser">Hair Dresser</option>
+                                                        <option value="tailor">Tailor</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label>Upload Shop Logo*</label>
+                                            <div class="upload-input">
+                                                <input type="file" id="upload" name="upload">
+                                                <label for="upload" class="content text-center">
+                                                    <span class="text">
+                                                        <span class="d-block mb-15">Drop files anywhere
+                                                            to Upload</span>
+                                                        <span class="mb-15 plus-icon"><i
+                                                                class="lni lni-plus"></i></span>
+                                                        <span class="main-btn d-block btn-hover">Select
+                                                            File</span>
+                                                        <span class="d-block">Maximum upload file size
+                                                            10Mb</span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                                <label class="video-label">Video Link* <span>Input only
+                                                        YouTube &amp; Vimeo</span></label>
+                                                <input name="video" type="text" placeholder="Input link">
+                                                <a href="javascript:void(0)" class="add-video"><i
+                                                        class="lni lni-plus"></i> Add Video</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group mt-30">
+                                                <label>Shop Description*</label>
+                                                <textarea name="message" placeholder="Input ad description"></textarea>
+                                            </div>
+                                        </div> --}}
                                         <div class="col-12">
                                             <div class="form-group button mb-0">
-                                                <button type="submit" class="btn">Next
-                                                    Step</button>
+                                               
+                                                <button type="submit" class="btn">Create My Shop</button>
                                             </div>
                                         </div>
                                     </div>
@@ -322,14 +363,7 @@
                         </div>
                     </div>
                 </div>
-                @else
-                <div class='d-flex justify-content-center'> 
-                    <div class="button">
-                        <a href="{{route('create.shop')}}" class="btn ">Create a Shop</a>             
-                    </div>
-                </div>
                
-                @endif
                 <!-- End Post Ad Tab -->
             </div>
         </div>

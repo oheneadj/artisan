@@ -56,11 +56,25 @@ Route::get('/my-ads', [AdController::class, 'myAds'])
 /**
  * Shop Routes
  */
-Route::get('/shops', [ShopController::class, 'index'])->name('shops');
-Route::get('/shops/shop', [ShopController::class, 'show'])->name('show.shops');
-Route::post('/shops', [ShopController::class, 'store'])->name('store.shop');
-Route::put('/shops', [ShopController::class, 'update'])->name('update.shop');
-Route::delete('/shops', [ShopController::class, 'destroy'])->name('destroy.shop');
+Route::get('/shops', [ShopController::class, 'index'])
+    ->name('shops');
+Route::get('/my-shop', [ShopController::class, 'user_shop'])
+    ->name('user.shop')
+    ->middleware('auth');
+Route::get('/shops/create', [ShopController::class, 'create'])
+    ->name('create.shop')
+    ->middleware('auth');
+Route::get('/shops/{shop}', [ShopController::class, 'show'])
+    ->name('show.shops');
+Route::post('/shops', [ShopController::class, 'store'])
+    ->name('store.shop')
+    ->middleware('auth');
+Route::put('/shops', [ShopController::class, 'update'])
+    ->name('update.shop')
+    ->middleware('auth');
+Route::delete('/shops', [ShopController::class, 'destroy'])
+    ->name('destroy.shop')
+    ->middleware('auth');
 
 /**
  * User Routes

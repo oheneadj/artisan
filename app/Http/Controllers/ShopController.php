@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ad;
 use App\Models\Shop;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -21,7 +22,13 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+            'shop.create',
+            [
+                "ads" => Ad::all(),
+                'page_title' => "My Shop"
+            ]
+        );
     }
 
     /**
@@ -29,7 +36,19 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'name' => ['required', 'min:3'],
+            'location' => ['required']
+        ]);
+
+        $formFields['slug'] = Str::slug($formFields['name']);
+        $formFields['user_id'] = auth()->user()->id;
+
+        if (Shop::create($formFields)) {
+            return redirect(route('user.shop'))->with('success', 'Shop created successfully and logged in');
+        } else {
+            return back()->with('success', 'Shop creation unsuccessfully');
+        }
     }
 
     /**
@@ -62,5 +81,16 @@ class ShopController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function user_shop()
+    {
+        return view(
+            'shop.index',
+            [
+                "ads" => Ad::all(),
+                'page_title' => "My Shop"
+            ]
+        );
     }
 }

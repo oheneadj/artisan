@@ -23,13 +23,13 @@ class AuthController extends Controller
     {
         $formFields = $request->validate([
 
-            'phone_number' => ['required', 'numeric'],
+            'phone_number' => ['required', 'numeric', 'digits:10'],
             'password' => ['required']
         ]);
 
         if (auth()->attempt($formFields)) {
             $request->session()->regenerate();
-            return redirect('/')
+            return redirect()->intended()
                 ->with('success', 'You are logged in successfully');
         }
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
             'name' => ['required', 'min:3'],
             'gender' => ['required'],
             'date_of_birth' => ['required', 'date', 'min:3'],
-            'phone_number' => ['required', 'numeric', Rule::unique('users', 'phone_number')],
+            'phone_number' => ['required', 'numeric', 'digits:10', Rule::unique('users', 'phone_number')],
             'password' => 'required | confirmed | min:8'
         ]);
 

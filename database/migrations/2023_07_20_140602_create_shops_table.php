@@ -13,13 +13,18 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onDelete('cascade');
             $table->string('name');
             $table->string('slug');
             $table->string('location');
-            $table->string('certificate_number')->nullable();
-            $table->string('verified');
-            $table->timestamp('verified_at')->nullable();
+            $table->string('certificate_number')
+                ->nullable();
+            $table->boolean('verified')
+                ->nullable();
+            $table->timestamp('verified_at')
+                ->nullable();
             $table->timestamps();
         });
     }
