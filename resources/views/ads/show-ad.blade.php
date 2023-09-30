@@ -50,7 +50,7 @@
                                             </a>
                                         @endauth
                                         @guest
-                                            <a href="tel:+002562352589" class="call">
+                                            <a href="#" class="call">
                                                 <i class="lni lni-phone-set"></i>
                                                 <span>Click to reveal contact details</span>
                                             </a>
