@@ -45,14 +45,13 @@
                                         @auth
                                             <a href="tel:+002562352589" class="call">
                                                 <i class="lni lni-phone-set"></i>
-                                                +00 256 235 2589
-                                                <span>Call &amp; Get more info</span>
+                                                <span>Call 0243633538</span>
                                             </a>
                                         @endauth
                                         @guest
-                                            <a href="#" class="call">
+                                            <a href="{{route('login')}}" class="call">
                                                 <i class="lni lni-phone-set"></i>
-                                                <span>Click to reveal contact details</span>
+                                                <span>Login to reveal contact details</span>
                                             </a>
                                         @endguest
                                     </li>
@@ -138,6 +137,7 @@
                         <!-- Start Single Block -->
                         <div class="single-block comment-form">
                             <h3>Post a comment</h3>
+                            @auth
                             <form action="item-details.html#" method="POST">
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
@@ -164,6 +164,13 @@
                                     </div>
                                 </div>
                             </form>
+                            @endauth
+
+                            @guest
+                                <div class="button">
+                                            <a href="{{route('login')}}" class="btn"> Login to Post a Comment</a>
+                                </div>
+                            @endguest
                         </div>
                         <!-- End Single Block -->
                     </div>
@@ -183,6 +190,7 @@
                             <!-- Start Single Block -->
                             <div class="single-block contant-seller comment-form">
                                 <h3>Contact Seller</h3>
+                                @auth
                                 <form action="item-details.html#" method="POST">
                                     <div class="row">
                                         <div class="col-12">
@@ -209,6 +217,14 @@
                                         </div>
                                     </div>
                                 </form>
+                                @endauth
+
+                                @guest
+                                 <div class="button">
+                                    <a href="{{route('login')}}" class="btn">Login to Chat Owner</a>
+                                </div>
+                                @endguest
+                                
                             </div>
                             <!-- End Single Block -->
                             <!-- Start Single Block -->
