@@ -36,12 +36,25 @@
                             aria-labelledby="nav-item-info-tab">
                             <!-- Start Post Ad Step One Content -->
                             <div class="step-one-content">
-                                <form class="default-form-style" method="post" action="post-item.html#">
+                                <form class="default-form-style" method="post" action="{{route('ad.new')}}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Add Title*</label>
-                                                <input name="title" type="text" placeholder="Enter Title">
+                                                <input name="name" type="text" value="{{old('name')}}" placeholder="Enter Title">
+                                    @error('name')
+                                  <small class="text-danger">{{ $message }}</small>
+                                @enderror   
+                                            </div>
+                                        </div>
+                                         <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Add Price*</label>
+                                                <input name="price" type="text" value="{{old('price')}} " placeholder="Enter Price" >
+                                            @error('price')
+                                  <small class="text-danger">{{ $message }}</small>
+                                @enderror   
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -64,8 +77,7 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group button mb-0">
-                                                <button type="submit" class="btn">Next
-                                                    Step</button>
+                                                <button type="submit" class="btn">Create Ad</button>
                                             </div>
                                         </div>
                                     </div>

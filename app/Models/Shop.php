@@ -9,6 +9,8 @@ class Shop extends Model
 {
     use HasFactory;
 
+    protected $with = ['ad'];
+
     /**
      * The attributes that are mass assignable.
      *

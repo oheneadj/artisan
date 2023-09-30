@@ -6,6 +6,7 @@ use App\Models\Ad;
 use App\Models\Shop;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ShopController extends Controller
 {
@@ -25,12 +26,13 @@ class ShopController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+
         return view(
             'shop.create',
             [
-                "ads" => Ad::all(),
+
                 'page_title' => "My Shop"
             ]
         );
@@ -49,10 +51,24 @@ class ShopController extends Controller
         $formFields['slug'] = Str::slug($formFields['name']);
         $formFields['user_id'] = auth()->user()->id;
 
+
+
         if (Shop::create($formFields)) {
-            return redirect(route('user.shop'))->with('success', 'Shop created successfully and logged in');
+
+            if (session('intendedURL') !== null) {
+
+                //store session data in variable and delete from session
+                $URL = session('intendedURL');
+                session()->forget('intendedURL');
+
+                return redirect(route($URL))
+                    ->with('success', 'Shop created successfully. You can now create your ads');
+            } else {
+                return  redirect(route('user.shop'))
+                    ->with('success', 'Shop created successfully ');
+            }
         } else {
-            return back()->with('success', 'Shop creation unsuccessfully');
+            return back()->with('danger', 'Shop creation unsuccessfully');
         }
     }
 

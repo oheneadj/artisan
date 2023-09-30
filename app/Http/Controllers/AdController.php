@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ad;
-use App\Models\Category;
+use App\Models\Shop;
 use App\Models\User;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 
 class AdController extends Controller
 {
@@ -17,7 +21,7 @@ class AdController extends Controller
         return view(
             'ads.index',
             [
-                "ads" => Ad::all(),
+                "ads" => Ad::all()->with('shop'),
                 "categories" => Category::all()
             ]
         );
@@ -26,8 +30,15 @@ class AdController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        // Check to see if user has already created a shop else take him to shop create page
+        if (Shop::where('user_id', auth()->user()->id)->first() == null) {
+            // store the intended link in session
+            session(['intendedURL' => Route::currentRouteName()]);
+            return redirect(route('create.shop'));
+        }
+
         return view('ads.create-ad', ['page_title' => 'Post Ad']);
     }
 
@@ -36,7 +47,24 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'name' => ['required', 'min:3'],
+            'price' => ['required', 'numeric']
+        ]);
+
+        $formFields['slug'] = Str::slug($formFields['name']);
+        $formFields['user_id'] = auth()->user()->id;
+        $formFields['shop_id'] = Shop::where('user_id', '=', auth()->user()->id)->first()->id;
+        //$formFields['category_id'] = 1;
+
+
+        if (Ad::create($formFields)) {
+
+            return  redirect('/')
+                ->with('success', 'Ad created successfully ');
+        } else {
+            return back()->with('danger', 'Ad creation unsuccessfully');
+        }
     }
 
     /**
@@ -79,11 +107,12 @@ class AdController extends Controller
 
     public function myAds()
     {
+
         return view(
             'ads.my-ads',
             [
                 'page_title' => 'My Ads',
-                "ads" => Ad::where('user_id', auth()->user()->id),
+                "shop" => Shop::where('user_id', auth()->user()->id)->first(),
             ]
         );
     }
@@ -92,6 +121,8 @@ class AdController extends Controller
     {
         return view('ads.favourite', ['page_title' => 'My Ads']);
     }
+
+
     public function bookmarked()
     {
         return view('ads.bookmarked', ['page_title' => 'My Ads']);

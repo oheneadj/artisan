@@ -9,6 +9,8 @@ class Ad extends Model
 {
     use HasFactory;
 
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +26,7 @@ class Ad extends Model
      */
     public function shop()
     {
-        $this->belongsTo(Shop::class);
+        return $this->belongsTo(Shop::class);
     }
 
     /**

@@ -42,13 +42,26 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Shop Name*</label>
-                                                <input name="title" value="{{$shop->name}}" type="text" placeholder="Enter Title">
+                                                <p>{{$shop->name}}</p>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Shop Location*</label>
-                                                <input name="location" value="{{$shop->location}}" type="text" placeholder="Enter Location">
+                                               <p>{{$shop->location}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Verification Status*</label>
+                                                @if($shop->verified == null)
+                                               <span class="badge bg-danger">Not Verified</span>
+                                                <a href="#" class="outer-link">Click here to veify your shop</a>
+                                               @else
+                                               <span class="badge bg-success">Verified</span>
+                                              
+                                               @endif
                                             </div>
                                         </div>
                                         <div class="col-12">

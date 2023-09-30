@@ -4,14 +4,25 @@
 
         <div class="dashboard-block mt-0">
             <h3 class="block-title">My Ads</h3>
-            
-            @if($ads != '')
+            {{-- Check if user has created a shop --}}
+            @if($shop == null)
             <div class='d-flex justify-content-center'> 
                     <div class="button">
                         <a href="{{route('create.shop')}}" class="btn ">Create a Shop</a>             
                     </div>
             </div>
-            @else
+            {{-- check if shop has ads --}}
+            @elseif($shop->first()->ad->count() == 0)
+            <div class='d-flex justify-content-center mb-3'> 
+                     <p>You haven't created any ad yet</p>                               
+            </div>
+            <div class='d-flex justify-content-center'> 
+                    <div class="button">
+                        <a href="{{route('ad.create')}}" class="btn ">Create an Ad</a>             
+                    </div>
+            </div>
+            {{-- Display shop adds if ther are not empty --}}
+             @elseif($shop->first()->ad->count() != 0)
             <nav class="list-nav">
                 <ul>
                     <li class="active"><a href="javascript:void(0)">All Ads <span>42</span></a></li>

@@ -7,14 +7,14 @@
              <span class="flat-badge sale">Sale</span>
          </div>
          <div class="content">
-             <a href="javascript:void(0)" class="tag">{{ $ad->name }}</a>
+             <a href="javascript:void(0)" class="tag">{{ $ad->shop->name }}</a>
              <h3 class="title">
-                 <a href="{{ route('ad.single', $ad->id) }}">Apple Iphone X</a>
+                 <a href="{{ route('ad.single', $ad->id) }}">{{ $ad->name }}</a>
              </h3>
              <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                     </i>Boston</a></p>
+                     </i>{{ $ad->shop->location }}</a></p>
              <ul class="info">
-                 <li class="price">${{ $ad->price }}</li>
+                 <li class="price">GH₵{{ $ad->price }}</li>
                  <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
                  </li>
              </ul>
