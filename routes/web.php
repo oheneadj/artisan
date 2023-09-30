@@ -26,7 +26,7 @@ Route::get('/ads', [AdController::class, 'index'])
 Route::get('/ads/create', [AdController::class, 'create'])
     ->name('ad.create')
     ->middleware('auth');
-Route::get('/ads/{ad}', [AdController::class, 'show'])
+Route::get('/ads/{ad:slug}', [AdController::class, 'show'])
     ->name('ad.single');
 Route::post('/ads', [AdController::class, 'store'])
     ->name('ad.new')

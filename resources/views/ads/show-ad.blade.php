@@ -28,10 +28,9 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
-                            <h2 class="title">MacBook Pro 13-inch</h2>
-                            <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">New York,
-                                    USA</a></p>
-                            <h3 class="price">$999</h3>
+                            <h2 class="title">{{$ad->name}}</h2>
+                            <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">{{$ad->shop->location}}</a></p>
+                            <h3 class="price">GH₵{{$ad->price}}</h3>
                             <div class="list-info">
                                 <h4>Informations</h4>
                                 <ul>
@@ -172,11 +171,11 @@
                         <div class="item-details-sidebar">
                             <!-- Start Single Block -->
                             <div class="single-block author">
-                                <h3>Author</h3>
+                                <h3>Owner</h3>
                                 <div class="content">
                                     <img src="assets/images/testimonial/testi3.jpg" alt="#">
-                                    <h4>Miliya Jessy</h4>
-                                    <span>Member Since May 15,2023</span>
+                                    <h4>{{$ad->shop->name}}</h4>
+                                    <span>Member Since {{$ad->shop->created_at->toFormattedDateString()}}</span>
                                     <a href="javascript:void(0)" class="see-all">See All Ads</a>
                                 </div>
                             </div>

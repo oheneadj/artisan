@@ -11,14 +11,14 @@
             </div>
             <div class="col-lg-7 col-md-5 col-12">
                 <div class="content">
-                    <a href="javascript:void(0)" class="tag">{{ $ad->name }}</a>
+                    <a href="javascript:void(0)" class="tag">{{ $ad->shop->name }}</a>
                     <h3 class="title">
-                        <a href="item-details.html">Story Book</a>
+                        <a href="{{ route('ad.single', $ad->slug) }}">{{ $ad->name }}</a>
                     </h3>
                     <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                            </i>New York, USA</a></p>
+                            </i>{{ $ad->shop->location }}</a></p>
                     <ul class="info">
-                        <li class="price">${{ $ad->price }}</li>
+                        <li class="price">GH₵{{ $ad->price }}</li>
                         <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
                         </li>
                     </ul>

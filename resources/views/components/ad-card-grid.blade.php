@@ -2,14 +2,14 @@
      <!-- Start Single Item -->
      <div class="single-item-grid">
          <div class="image">
-             <a href="item-details.html"><img src="assets/images/items-tab/item-1.jpg" alt="#"></a>
+             <a href="{{ route('ad.single', $ad->slug) }}"><img src="assets/images/items-tab/item-1.jpg" alt="#"></a>
              <i class="cross-badge lni lni-bolt"></i>
              <span class="flat-badge sale">Sale</span>
          </div>
          <div class="content">
              <a href="javascript:void(0)" class="tag">{{ $ad->shop->name }}</a>
              <h3 class="title">
-                 <a href="{{ route('ad.single', $ad->id) }}">{{ $ad->name }}</a>
+                 <a href="{{ route('ad.single', $ad->slug) }}">{{ $ad->name }}</a>
              </h3>
              <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
                      </i>{{ $ad->shop->location }}</a></p>
