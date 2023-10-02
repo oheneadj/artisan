@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ad;
 use App\Models\Shop;
 use App\Models\User;
+use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -47,10 +48,15 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $formFields = $request->validate([
-            'name' => ['required', 'min:3'],
-            'price' => ['required', 'numeric']
+            'name' => 'required', 'min:3',
+            'price' => 'required', 'numeric',
+            'images' => 'required',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
 
         $formFields['slug'] = Str::slug($formFields['name']);
         $formFields['user_id'] = auth()->user()->id;
@@ -58,12 +64,28 @@ class AdController extends Controller
         //$formFields['category_id'] = 1;
 
 
-        if (Ad::create($formFields)) {
 
-            return  redirect('/')
+        $ad = Ad::create($formFields);
+
+        if ($ad) {
+
+            if ($formFields['images']) {
+                foreach ($formFields['images'] as $image) {
+                    $imageName = time() . rand(1, 999) . '.' . $image->extension();
+
+                    $image->move(public_path('images'), $imageName);
+
+                    Image::create([
+                        'name' => $imageName,
+                        'ad_id' => $ad['id']
+                    ]);
+                }
+            }
+
+            return  redirect(route('ad.single', $ad->slug))
                 ->with('success', 'Ad created successfully ');
         } else {
-            return back()->with('danger', 'Ad creation unsuccessfully');
+            return redirect('/about')->with('danger', 'Ad creation unsuccessfully');
         }
     }
 

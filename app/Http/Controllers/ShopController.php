@@ -29,6 +29,12 @@ class ShopController extends Controller
     public function create(Request $request)
     {
 
+        // Check if user already has a shop
+        if (Shop::where('user_id', auth()->user()->id)->first() != null) {
+            //return user to shop
+            return redirect(route('user.shop'));
+        }
+
         return view(
             'shop.create',
             [
@@ -43,6 +49,14 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
+
+        // Check if user already has a shop
+        if (Shop::where('user_id', auth()->user()->id)->first() != null) {
+            //if user has a shop, return to user shop
+            return redirect(route('user.shop'));
+        }
+
+
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
             'location' => ['required']

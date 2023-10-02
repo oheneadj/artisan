@@ -14,7 +14,7 @@ class Image extends Model
      *
      * @var array
      */
-    protected $fillable = ['image', 'ad_id'];
+    protected $fillable = ['name', 'ad_id'];
 
     /**
      * ad

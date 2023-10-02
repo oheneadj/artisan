@@ -7,20 +7,15 @@
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
-                                    <img src="{{ asset('assets/images/item-details/image1.jpg') }}" id="current"
+                                    <img height="300" src="/images/{{$ad->image->first()->name}}" id="current"
                                         alt="#">
                                 </div>
+
+                                        
                                 <div class="images">
-                                    <img src="{{ asset('assets/images/item-details/image1.jpg') }}" class="img"
-                                        alt="#">
-                                    <img src="{{ asset('assets/images/item-details/image2.jpg') }}" class="img"
-                                        alt="#">
-                                    <img src="{{ asset('assets/images/item-details/image3.jpg') }}" class="img"
-                                        alt="#">
-                                    <img src="{{ asset('assets/images/item-details/image4.jpg') }}" class="img"
-                                        alt="#">
-                                    <img src="{{ asset('assets/images/item-details/image5.jpg') }}" class="img"
-                                        alt="#">
+                                    @foreach ($ad->image as $image)
+                                            <img  height="60" src="/images/{{$image->name}}" class="img" alt="#">
+                                    @endforeach
                                 </div>
                             </main>
 
@@ -168,7 +163,7 @@
 
                             @guest
                                 <div class="button">
-                                            <a href="{{route('login')}}" class="btn"> Login to Post a Comment</a>
+                                    <a href="{{route('login')}}" class="btn"> Login to Post a Comment</a>
                                 </div>
                             @endguest
                         </div>

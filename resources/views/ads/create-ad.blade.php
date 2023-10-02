@@ -35,8 +35,8 @@
                         <div class="tab-pane fade show active" id="nav-item-info" role="tabpanel"
                             aria-labelledby="nav-item-info-tab">
                             <!-- Start Post Ad Step One Content -->
-                            <div class="step-one-content">
-                                <form class="default-form-style" method="post" action="{{route('ad.new')}}">
+                            <div class="step-one-content step-two-content">
+                                <form class="default-form-style" method="post" action="{{route('ad.new')}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-12">
@@ -57,22 +57,54 @@
                                 @enderror   
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>Category*</label>
+                                                <label>Select Shop Type*</label>
                                                 <div class="selector-head">
                                                     <span class="arrow"><i class="lni lni-chevron-down"></i></span>
                                                     <select class="user-chosen-select">
-                                                        <option value="none">Select a Category
+                                                        <option value="none">Select an option
                                                         </option>
-                                                        <option value="none">Mobile Phones</option>
-                                                        <option value="none">Electronics</option>
-                                                        <option value="none">Computers</option>
-                                                        <option value="none">Headphones</option>
-                                                        <option value="none">Furnitures</option>
-                                                        <option value="none">Books</option>
+                                                        <option value="hair dresser">Hair Dresser</option>
+                                                        <option value="tailor">Tailor</option>
                                                     </select>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="text-dark mb-3"><b>Upload Pictures {{"(6 Maximum)"}}*</b></label>
+                                            <div class="upload-input">
+                                                <input type="file" id="upload" value="{{old('images')}}" name="images[]" multiple>
+                                                <label for="upload" class="content text-center">
+                                                    <span class="text">
+                                                        <span class="d-block mb-15">Drop files anywhere
+                                                            to Upload</span>
+                                                        <span class="mb-15 plus-icon"><i
+                                                                class="lni lni-plus"></i></span>
+                                                        <span class="main-btn d-block btn-hover">Select
+                                                            File</span>
+                                                        <span class="d-block">Maximum upload file size
+                                                            10Mb</span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            @error('images')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror   
+                                        </div>
+                                        {{-- <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                                <label class="video-label">Video Link* <span>Input only
+                                                        YouTube &amp; Vimeo</span></label>
+                                                <input name="video" type="text" placeholder="Input link">
+                                                <a href="javascript:void(0)" class="add-video"><i
+                                                        class="lni lni-plus"></i> Add Video</a>
+                                            </div>
+                                        </div> --}}
+                                        <div class="col-12">
+                                            <div class="form-group mt-30">
+                                                <label>Ad Description*</label>
+                                                <textarea name="message" placeholder="Input ad description"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12">

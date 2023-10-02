@@ -1,8 +1,10 @@
  <div class="col-lg-4 col-md-6 col-12">
      <!-- Start Single Item -->
+
+     
      <div class="single-item-grid">
          <div class="image">
-             <a href="{{ route('ad.single', $ad->slug) }}"><img src="assets/images/items-tab/item-1.jpg" alt="#"></a>
+             <a href="{{ route('ad.single', $ad->slug) }}"><img height="200px" src="/images/{{$ad->image->first()->name}}" alt="#"></a>
              <i class="cross-badge lni lni-bolt"></i>
              <span class="flat-badge sale">Sale</span>
          </div>
