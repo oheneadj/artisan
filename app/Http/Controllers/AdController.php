@@ -19,13 +19,10 @@ class AdController extends Controller
      */
     public function index()
     {
-        return view(
-            'ads.index',
-            [
-                "ads" => Ad::all()->with('shop'),
-                "categories" => Category::all()
-            ]
-        );
+        return view('ads.index', [
+            "ads" => Ad::with('shop')->latest()
+                ->paginate(6)
+        ]);
     }
 
     /**
@@ -48,7 +45,6 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
-
 
         $formFields = $request->validate([
             'name' => 'required', 'min:3',

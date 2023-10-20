@@ -4,9 +4,9 @@
         <div class="row align-items-center">
             <div class="col-lg-5 col-md-7 col-12">
                 <div class="image">
-                    <a href="item-details.html"><img src="assets/images/items-tab/item-6.jpg" alt="#"></a>
+                    <a href="{{ route('ad.single', $ad->slug) }}"><img class="image-card" height="250" src="/images/{{$ad->image->first()->name}}" alt="#"></a>
                     <i class="cross-badge lni lni-bolt"></i>
-                    <span class="flat-badge rent">Rent</span>
+                    <span class="flat-badge rent">Sale</span>
                 </div>
             </div>
             <div class="col-lg-7 col-md-5 col-12">

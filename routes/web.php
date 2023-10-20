@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\AdController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,10 @@ Route::put('/ads', [AdController::class, 'update'])
 Route::delete('/ads', [AdController::class, 'destroy'])
     ->name('ad.delete')
     ->middleware('auth');
+
+//Comment
+Route::post('/ads/{ad}/comment', [CommentController::class, 'store'])
+    ->name('comment.store');
 
 //Replace user with {user} in production
 Route::get('/ads/user/favourites', [AdController::class, 'favourites'])
@@ -123,7 +128,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])
 /**
  * Pages Routes
  */
-Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/', [AdController::class, 'index'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 Route::get('/terms-of-use', [PageController::class, 'terms_of_use'])->name('terms-of-use');

@@ -49,4 +49,14 @@ class Ad extends Model
     {
         return $this->hasMany(Image::class);
     }
+
+    /**
+     * image
+     *
+     * @return void
+     */
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

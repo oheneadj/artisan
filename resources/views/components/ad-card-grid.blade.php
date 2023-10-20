@@ -4,7 +4,7 @@
      
      <div class="single-item-grid">
          <div class="image">
-             <a href="{{ route('ad.single', $ad->slug) }}"><img height="200px" src="/images/{{$ad->image->first()->name}}" alt="#"></a>
+             <a href="{{ route('ad.single', $ad->slug) }}"><img class="image-card" height="280" src="/images/{{$ad->image->first()->name}}" alt="#"></a>
              <i class="cross-badge lni lni-bolt"></i>
              <span class="flat-badge sale">Sale</span>
          </div>

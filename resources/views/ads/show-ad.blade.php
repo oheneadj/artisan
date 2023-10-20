@@ -1,20 +1,20 @@
 <x-layout>
     <section class="item-details section">
         <div class="container">
-            <div class="top-area">
-                <div class="row">
+            <div class="top-area mt-5">
+                <div class="row ">
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
-                                    <img height="300" src="/images/{{$ad->image->first()->name}}" id="current"
+                                    <img class="image-card" height="350" src="/images/{{$ad->image->first()->name}}" id="current"
                                         alt="#">
                                 </div>
 
                                         
                                 <div class="images">
                                     @foreach ($ad->image as $image)
-                                            <img  height="60" src="/images/{{$image->name}}" class="img" alt="#">
+                                            <img  height="60" src="/images/{{$image->name}}" class="img image-card" alt="#">
                                     @endforeach
                                 </div>
                             </main>
@@ -110,46 +110,43 @@
                         </div>
                         <!-- End Single Block -->
                         <!-- Start Single Block -->
+                              @if($ad->comment->count() != 0)
                         <div class="single-block comments">
                             <h3>Comments</h3>
+                      
                             <!-- Start Single Comment -->
+                            @foreach ($ad->comment as $comment)
                             <div class="single-comment">
                                 <img src="assets/images/testimonial/testi2.jpg" alt="#">
                                 <div class="content">
-                                    <h4>Luis Havens</h4>
-                                    <span>25 Feb, 2023</span>
+                                    <a href="#"><h4>{{$comment->user->name}}</h4></a>
+                                    <span>{{$comment->created_at->diffForHumans()}}</span>
                                     <p>
-                                        There are many variations of passages of Lorem Ipsum available, but the majority
-                                        have suffered alteration in some form, by injected humour, or randomised words
-                                        which don't look even slightly believable.
+                                        {{$comment->comment}}
                                     </p>
                                     <a href="javascript:void(0)" class="reply"><i class="lni lni-reply"></i> Reply</a>
                                 </div>
                             </div>
+                            @endforeach
                             <!-- End Single Comment -->
+                           
+                            
                         </div>
+                         @endif
                         <!-- End Single Block -->
                         <!-- Start Single Block -->
                         <div class="single-block comment-form">
                             <h3>Post a comment</h3>
                             @auth
-                            <form action="item-details.html#" method="POST">
+                            <form action="{{route('comment.store', $ad->id)}}" method="POST">
+                                @csrf
                                 <div class="row">
-                                    <div class="col-lg-6 col-12">
-                                        <div class="form-box form-group">
-                                            <input type="text" name="name"
-                                                class="form-control form-control-custom" placeholder="Your Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-12">
-                                        <div class="form-box form-group">
-                                            <input type="email" name="email"
-                                                class="form-control form-control-custom" placeholder="Your Email">
-                                        </div>
-                                    </div>
                                     <div class="col-12">
                                         <div class="form-box form-group">
-                                            <textarea name="#" class="form-control form-control-custom" placeholder="Your Comments"></textarea>
+                                            <textarea name="comment" class="form-control form-control-custom" placeholder="Your Comments"></textarea>
+                                            @error('comment')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -160,7 +157,7 @@
                                 </div>
                             </form>
                             @endauth
-
+                            
                             @guest
                                 <div class="button">
                                     <a href="{{route('login')}}" class="btn"> Login to Post a Comment</a>
