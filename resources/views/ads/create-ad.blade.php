@@ -36,45 +36,53 @@
                             aria-labelledby="nav-item-info-tab">
                             <!-- Start Post Ad Step One Content -->
                             <div class="step-one-content step-two-content">
-                                <form class="default-form-style" method="post" action="{{route('ad.new')}}" enctype="multipart/form-data">
+                                <form class="default-form-style" method="post" action="{{ route('ad.new') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Add Title*</label>
-                                                <input name="name" type="text" value="{{old('name')}}" placeholder="Enter Title">
-                                    @error('name')
-                                  <small class="text-danger">{{ $message }}</small>
-                                @enderror   
+                                                <input name="name" type="text" value="{{ old('name') }}"
+                                                    placeholder="Enter Title">
+                                                @error('name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
-                                         <div class="col-12">
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <label>Add Price*</label>
-                                                <input name="price" type="text" value="{{old('price')}} " placeholder="Enter Price" >
-                                            @error('price')
-                                  <small class="text-danger">{{ $message }}</small>
-                                @enderror   
+                                                <input name="price" type="text" value="{{ old('price') }} "
+                                                    placeholder="Enter Price">
+                                                @error('price')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
-                                         <div class="col-12">
+                                        <div class="col-12">
                                             <div class="form-group">
-                                                <label>Select Shop Type*</label>
+                                                <label>Select Ad Category*</label>
                                                 <div class="selector-head">
                                                     <span class="arrow"><i class="lni lni-chevron-down"></i></span>
-                                                    <select class="user-chosen-select">
-                                                        <option value="none">Select an option
+                                                    <select name="category_id" class="user-chosen-select">
+                                                        <option value="none">Select Category
                                                         </option>
-                                                        <option value="hair dresser">Hair Dresser</option>
-                                                        <option value="tailor">Tailor</option>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->name }}
+                                                            </option>
+                                                        @endforeach
+
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <label class="text-dark mb-3"><b>Upload Pictures {{"(6 Maximum)"}}*</b></label>
+                                            <label class="text-dark mb-3"><b>Upload Pictures
+                                                    {{ '(6 Maximum)' }}*</b></label>
                                             <div class="upload-input">
-                                                <input type="file" id="upload" value="{{old('images')}}" name="images[]" multiple>
+                                                <input type="file" id="upload" value="{{ old('images') }}"
+                                                    name="images[]" multiple>
                                                 <label for="upload" class="content text-center">
                                                     <span class="text">
                                                         <span class="d-block mb-15">Drop files anywhere
@@ -89,8 +97,8 @@
                                                 </label>
                                             </div>
                                             @error('images')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror   
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         {{-- <div class="col-lg-6 col-12">
                                             <div class="form-group">
@@ -104,7 +112,7 @@
                                         <div class="col-12">
                                             <div class="form-group mt-30">
                                                 <label>Ad Description*</label>
-                                                <textarea name="message" placeholder="Input ad description"></textarea>
+                                                <textarea name="description" placeholder="Input ad description">{{ old('description') }}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-12">

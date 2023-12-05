@@ -21,7 +21,8 @@ class AdController extends Controller
     {
         return view('ads.index', [
             "ads" => Ad::with('shop')->latest()
-                ->paginate(6)
+                ->paginate(6),
+            "categories" => Category::get()
         ]);
     }
 
@@ -37,7 +38,7 @@ class AdController extends Controller
             return redirect(route('create.shop'));
         }
 
-        return view('ads.create-ad', ['page_title' => 'Post Ad']);
+        return view('ads.create-ad', ['page_title' => 'Post Ad', 'categories' => Category::get()]);
     }
 
     /**
@@ -49,12 +50,25 @@ class AdController extends Controller
         $formFields = $request->validate([
             'name' => 'required', 'min:3',
             'price' => 'required', 'numeric',
+            'description' => 'required',
+            'category_id' => 'required',
             'images' => 'required',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-
         $formFields['slug'] = Str::slug($formFields['name']);
+
+        $ad = Ad::where('name', '=', $formFields['name'])->latest()->first();
+
+        if ($ad !== null) {
+            $ad->id;
+            if ($ad->id == 1) {
+                $formFields['slug'] = $formFields['slug'] . "-" . $ad->id;
+            } else {
+                $formFields['slug'] = $formFields['slug'] . "-" . ++$ad->id;
+            }
+        }
+
         $formFields['user_id'] = auth()->user()->id;
         $formFields['shop_id'] = Shop::where('user_id', '=', auth()->user()->id)->first()->id;
         //$formFields['category_id'] = 1;
@@ -88,7 +102,7 @@ class AdController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ad $ad)
+    public function show(Shop $shop, Ad $ad)
     {
         return view(
             'ads.show-ad',

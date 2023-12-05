@@ -15,12 +15,10 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view(
-            "ads.index",
-            [
-                "ads" => Ad::all()
-            ]
-        );
+        return view('ads.index', [
+            "ads" => Ad::with('shop')->latest()
+                ->paginate(6)
+        ]);
     }
 
     /**
@@ -59,7 +57,8 @@ class ShopController extends Controller
 
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
-            'location' => ['required']
+            'location' => ['required'],
+            'phone_number' => ['required', 'numeric', 'digits:10', 'unique:shops,phone_number'],
         ]);
 
         $formFields['slug'] = Str::slug($formFields['name']);
@@ -89,9 +88,15 @@ class ShopController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Shop $shop)
     {
-        //
+        return view(
+            'shops.show-shop',
+            [
+                'page_title' => $shop->name,
+                'ad' => $shop,
+            ]
+        );
     }
 
     /**

@@ -15,10 +15,13 @@
             <ul class="list">
 
                 @foreach ($categories as $category)
-                    <li>
-                        <a href="{{ $category->slug }}"><i class="{{ $category->icon }}"></i>
-                            {{ $category->name }}<span>15</span></a>
-                    </li>
+                    @if ($category->ad->count() > 0)
+                        <li>
+                            <a href="{{ route('category.show', $category->slug) }}"><i
+                                    class="{{ $category->icon }}"></i>
+                                {{ $category->name }}<span>{{ $category->ad->count() }}</span></a>
+                        </li>
+                    @endif
                 @endforeach
 
             </ul>

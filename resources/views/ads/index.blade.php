@@ -3,7 +3,7 @@
         <div class="container mt-5">
             <div class="row">
                 {{-- Sidebar --}}
-                <x-sidebar :categories='$ads' />
+                <x-sidebar :categories='$categories' />
                 {{-- End of Sidebar --}}
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="category-grid-list">
@@ -28,8 +28,8 @@
                                             <div class="col-12">
                                                 <!-- Pagination -->
                                                 <div class="pagination left">
-                                                      {{ $ads->links() }}
-                                                   
+                                                    {{ $ads->links() }}
+
                                                 </div>
                                                 <!--/ End Pagination -->
                                             </div>
@@ -47,7 +47,7 @@
                                             <div class="col-12">
                                                 <!-- Pagination -->
 
-                                                
+
                                                 <div class="pagination left">
 
                                                     {{ $ads->links() }}

@@ -2,19 +2,20 @@
     <section class="item-details section">
         <div class="container">
             <div class="top-area mt-5">
-                <div class="row ">
+                <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
-                                    <img class="image-card" height="350" src="/images/{{$ad->image->first()->name}}" id="current"
-                                        alt="#">
+                                    <img class="single-ad" height="350" src="/images/{{ $ad->image->first()->name }}"
+                                        id="current" alt="#">
                                 </div>
 
-                                        
-                                <div class="images">
+
+                                <div class="images single-ad-img">
                                     @foreach ($ad->image as $image)
-                                            <img  height="60" src="/images/{{$image->name}}" class="img image-card" alt="#">
+                                        <img height="60" src="/images/{{ $image->name }}"
+                                            class="img single-ad-thumbnail" alt="#">
                                     @endforeach
                                 </div>
                             </main>
@@ -23,9 +24,10 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
-                            <h2 class="title">{{$ad->name}}</h2>
-                            <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">{{$ad->shop->location}}</a></p>
-                            <h3 class="price">GH₵{{$ad->price}}</h3>
+                            <h2 class="title">{{ $ad->name }}</h2>
+                            <p class="location"><i class="lni lni-map-marker"></i><a
+                                    href="javascript:void(0)">{{ $ad->shop->location }}</a></p>
+                            <h3 class="price">GH₵{{ $ad->price }}</h3>
                             <div class="list-info">
                                 <h4>Informations</h4>
                                 <ul>
@@ -38,13 +40,13 @@
                                 <ul>
                                     <li>
                                         @auth
-                                            <a href="tel:+002562352589" class="call">
+                                            <a href="tel:{{ $ad->shop->phone_number }}" class="call">
                                                 <i class="lni lni-phone-set"></i>
-                                                <span>Call 0243633538</span>
+                                                <span>Call {{ $ad->shop->phone_number }}</span>
                                             </a>
                                         @endauth
                                         @guest
-                                            <a href="{{route('login')}}" class="call">
+                                            <a href="{{ route('login') }}" class="call">
                                                 <i class="lni lni-phone-set"></i>
                                                 <span>Login to reveal contact details</span>
                                             </a>
@@ -82,20 +84,7 @@
                         <!-- Start Single Block -->
                         <div class="single-block description">
                             <h3>Description</h3>
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have
-                                suffered alteration in some form, by injected humour, or randomised words which don't
-                                look even slightly believable.
-                            </p>
-                            <ul>
-                                <li>Model: Apple MacBook Pro 13.3-Inch MYDA2</li>
-                                <li>Apple M1 chip with 8-core CPU and 8-core GPU</li>
-                                <li>8GB RAM</li>
-                                <li>256GB SSD</li>
-                                <li>13.3-inch 2560x1600 LED-backlit Retina Display</li>
-                            </ul>
-                            <p>The generated Lorem Ipsum is therefore always free from repetition, injected humour, or
-                                non-characteristic words etc.</p>
+                            <p>{{ $ad->description }}</p>
                         </div>
                         <!-- End Single Block -->
                         <!-- Start Single Block -->
@@ -110,57 +99,60 @@
                         </div>
                         <!-- End Single Block -->
                         <!-- Start Single Block -->
-                              @if($ad->comment->count() != 0)
-                        <div class="single-block comments">
-                            <h3>Comments</h3>
-                      
-                            <!-- Start Single Comment -->
-                            @foreach ($ad->comment as $comment)
-                            <div class="single-comment">
-                                <img src="assets/images/testimonial/testi2.jpg" alt="#">
-                                <div class="content">
-                                    <a href="#"><h4>{{$comment->user->name}}</h4></a>
-                                    <span>{{$comment->created_at->diffForHumans()}}</span>
-                                    <p>
-                                        {{$comment->comment}}
-                                    </p>
-                                    <a href="javascript:void(0)" class="reply"><i class="lni lni-reply"></i> Reply</a>
-                                </div>
+                        @if ($ad->comment->count() != 0)
+                            <div class="single-block comments">
+                                <h3>Comments</h3>
+
+                                <!-- Start Single Comment -->
+                                @foreach ($ad->comment as $comment)
+                                    <div class="single-comment">
+                                        <img src="assets/images/testimonial/testi2.jpg" alt="#">
+                                        <div class="content">
+                                            <a href="#">
+                                                <h4>{{ $comment->user->name }}</h4>
+                                            </a>
+                                            <span>{{ $comment->created_at->diffForHumans() }}</span>
+                                            <p>
+                                                {{ $comment->comment }}
+                                            </p>
+                                            <a href="javascript:void(0)" class="reply"><i class="lni lni-reply"></i>
+                                                Reply</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <!-- End Single Comment -->
+
+
                             </div>
-                            @endforeach
-                            <!-- End Single Comment -->
-                           
-                            
-                        </div>
-                         @endif
+                        @endif
                         <!-- End Single Block -->
                         <!-- Start Single Block -->
                         <div class="single-block comment-form">
                             <h3>Post a comment</h3>
                             @auth
-                            <form action="{{route('comment.store', $ad->id)}}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-box form-group">
-                                            <textarea name="comment" class="form-control form-control-custom" placeholder="Your Comments"></textarea>
-                                            @error('comment')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                <form action="{{ route('comment.store', $ad->id) }}" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-box form-group">
+                                                <textarea name="comment" class="form-control form-control-custom" placeholder="Your Comments"></textarea>
+                                                @error('comment')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="button">
+                                                <button type="submit" class="btn">Post Comment</button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="button">
-                                            <button type="submit" class="btn">Post Comment</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
                             @endauth
-                            
+
                             @guest
                                 <div class="button">
-                                    <a href="{{route('login')}}" class="btn"> Login to Post a Comment</a>
+                                    <a href="{{ route('login') }}" class="btn"> Login to Post a Comment</a>
                                 </div>
                             @endguest
                         </div>
@@ -173,8 +165,8 @@
                                 <h3>Owner</h3>
                                 <div class="content">
                                     <img src="assets/images/testimonial/testi3.jpg" alt="#">
-                                    <h4>{{$ad->shop->name}}</h4>
-                                    <span>Member Since {{$ad->shop->created_at->toFormattedDateString()}}</span>
+                                    <h4>{{ $ad->shop->name }}</h4>
+                                    <span>Member Since {{ $ad->shop->created_at->toFormattedDateString() }}</span>
                                     <a href="javascript:void(0)" class="see-all">See All Ads</a>
                                 </div>
                             </div>
@@ -183,40 +175,29 @@
                             <div class="single-block contant-seller comment-form">
                                 <h3>Contact Seller</h3>
                                 @auth
-                                <form action="item-details.html#" method="POST">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-box form-group">
-                                                <input type="text" name="name"
-                                                    class="form-control form-control-custom" placeholder="Your Name">
+                                    <form action="item-details.html#" method="POST">
+                                        <div class="row">
+
+                                            <div class="col-12">
+                                                <div class="form-box form-group">
+                                                    <textarea name="#" class="form-control form-control-custom" placeholder="Your Message"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="button">
+                                                    <button type="submit" class="btn">Send Message</button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-box form-group">
-                                                <input type="email" name="email"
-                                                    class="form-control form-control-custom" placeholder="Your Email">
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-box form-group">
-                                                <textarea name="#" class="form-control form-control-custom" placeholder="Your Message"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="button">
-                                                <button type="submit" class="btn">Send Message</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
                                 @endauth
 
                                 @guest
-                                 <div class="button">
-                                    <a href="{{route('login')}}" class="btn">Login to Chat Owner</a>
-                                </div>
+                                    <div class="button">
+                                        <a href="{{ route('login') }}" class="btn">Login to Chat Owner</a>
+                                    </div>
                                 @endguest
-                                
+
                             </div>
                             <!-- End Single Block -->
                             <!-- Start Single Block -->

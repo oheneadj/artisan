@@ -5,8 +5,8 @@
             <h3 class="block-title">Create Your Shop</h3>
             <div class="inner-block">
                 <!-- Start Post Ad Tab -->
-               
-                   <div class="post-ad-tab">
+
+                <div class="post-ad-tab">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-item-info-tab" data-bs-toggle="tab"
@@ -37,24 +37,37 @@
                             aria-labelledby="nav-item-info-tab">
                             <!-- Start Post Ad Step One Content -->
                             <div class="step-two-content">
-                                 <form class="default-form-style" method="post" action="{{route('store.shop')}}">
-                                     @csrf
+                                <form class="default-form-style" method="post" action="{{ route('store.shop') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Shop Name</label>
-                                                <input name="name" value="{{old('name')}}" type="text" placeholder="Enter Shop name">
-                                            @error('name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror </div>
+                                                <input name="name" value="{{ old('name') }}" type="text"
+                                                    placeholder="Enter Shop name">
+                                                @error('name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Shop Location</label>
-                                                <input name="location" value="{{old('location')}}" type="text" placeholder="Enter Shop Location">
-                                            @error('location')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror 
+                                                <input name="location" value="{{ old('location') }}" type="text"
+                                                    placeholder="Enter Shop Location">
+                                                @error('location')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Phone Number</label>
+                                                <input name="phone_number" value="{{ old('phone_number') }}"
+                                                    type="text" placeholder="Enter Your Business Phone Number">
+                                                @error('phone_number')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         {{-- <div class="col-12">
@@ -106,7 +119,7 @@
                                         </div> --}}
                                         <div class="col-12">
                                             <div class="form-group button mb-0">
-                                               
+
                                                 <button type="submit" class="btn">Create My Shop</button>
                                             </div>
                                         </div>
@@ -363,7 +376,7 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <!-- End Post Ad Tab -->
             </div>
         </div>

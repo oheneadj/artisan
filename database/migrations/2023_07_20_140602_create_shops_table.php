@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('location');
+            $table->string('phone_number');
             $table->string('certificate_number')
                 ->nullable();
             $table->boolean('verified')

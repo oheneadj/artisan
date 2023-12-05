@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 
 /*
@@ -19,6 +20,14 @@ use App\Http\Controllers\CommentController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+/**  Ads Categories
+ */
+
+Route::get('/ads/categories/{category:slug}', [CategoryController::class, 'show'])
+    ->name('category.show');
+
 
 /**  Ads Routes
  */
@@ -38,6 +47,8 @@ Route::put('/ads', [AdController::class, 'update'])
 Route::delete('/ads', [AdController::class, 'destroy'])
     ->name('ad.delete')
     ->middleware('auth');
+
+
 
 //Comment
 Route::post('/ads/{ad}/comment', [CommentController::class, 'store'])

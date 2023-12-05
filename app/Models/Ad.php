@@ -17,7 +17,7 @@ class Ad extends Model
      * @var array<int, string>
      */
 
-    protected $fillable = ['user_id', 'name', 'slug', 'price', 'shop_id', 'category_id'];
+    protected $fillable = ['user_id', 'name', 'slug', 'price', 'shop_id', 'category_id', 'description'];
 
     /**
      * Relationships
@@ -36,7 +36,7 @@ class Ad extends Model
      */
     public function category()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
 

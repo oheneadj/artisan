@@ -17,7 +17,7 @@ class Shop extends Model
      * @var array<int, string>
      */
 
-    protected $fillable = ['user_id', 'logo', 'name', 'slug', 'location', 'certificate_number', 'verified', 'verified_at'];
+    protected $fillable = ['user_id', 'logo', 'name', 'slug', 'location', 'phone_number', 'certificate_number', 'verified', 'verified_at'];
 
     /**
      * Relationships

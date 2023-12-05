@@ -1,3 +1,29 @@
 .image-card {
+    object-fit: contain;
+    width: 50%;
+}
+
+.image {
+    height: 50%;
+}
+
+.single-item-grid {
+    height: 400px;
+}
+
+.single-ad-img {
+    width: 100%;
     object-fit: cover;
+}
+
+.single-ad {
+    object-fit: cover;
+    object-position: 95% 5%;
+}
+
+.single-ad-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 95% 5%;
 }
