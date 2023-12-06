@@ -1,16 +1,18 @@
  <div class="dashboard-sidebar">
      <div class="user-image">
-         <img src="{{ asset('assets/images/default-store.png') }}" alt="#">
+         <img src="{{ asset('assets/images/shop-default.png') }}" alt="#">
          <h3>{{ $shop->name }}
              <span style="color: rgb(173, 173, 173)">{{ '@' . $shop->slug }}</span>
          </h3>
      </div>
      <div class="dashboard-menu">
          <ul>
-             <li><i class="lni lni-dashboard dark"></i> <span class="dark"> Date Joined:</span>
+             <li><i class="lni lni-timer dark"></i> <span class="dark"> Date Joined:</span>
                  {{ $shop->created_at->toFormattedDateString() }}</li>
              <li><i class="lni lni-phone dark"></i> <span class="dark"> Phone:</span> {{ $shop->phone_number }}</li>
              <li><i class="lni lni-map-marker dark"></i> <span class="dark"> Location:</span> {{ $shop->location }}
+             </li>
+             <li><i class="lni lni-certificate red"></i> <span class="red"> Status: Not Verified</span>
              </li>
              <li>
                  <div class="gmap_canvas"><iframe width="100%" height="300" id="gmap_canvas"

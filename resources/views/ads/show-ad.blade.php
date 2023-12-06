@@ -162,7 +162,7 @@
                             <div class="single-block author">
                                 <h3>Posted By</h3>
                                 <div class="content">
-                                    <img width="10000" src="{{ asset('assets/images/default-store.png') }}"
+                                    <img src="{{ asset('assets/images/shop-default.png') }}"
                                         alt="{{ $ad->shop->name }}-logo">
                                     <a href="{{ route('show.shops', $ad->shop->slug) }}">
                                         <h4>{{ $ad->shop->name }}</h4>

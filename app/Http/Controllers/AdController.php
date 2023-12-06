@@ -21,7 +21,7 @@ class AdController extends Controller
     {
         return view('ads.index', [
             "ads" => Ad::with('shop')->latest()
-                ->paginate(6),
+                ->paginate(6)->withQueryString(),
             "categories" => Category::get()
         ]);
     }

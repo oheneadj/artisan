@@ -44,18 +44,31 @@
                              <div class="login-button">
                                  <ul>
                                      <li>
-                                         <a class="@if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif" href="{{ route('login') }}"><i
-                                                 class="lni lni-enter"></i>
+                                         <a class="@if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif"
+                                             href="{{ route('login') }}"><i class="lni lni-enter"></i>
                                              Login</a>
                                      </li>
                                      <li>
-                                         <a class="@if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif" href="{{ route('register') }}"><i
-                                                 class="lni lni-user"></i>
+                                         <a class="@if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif"
+                                             href="{{ route('register') }}"><i class="lni lni-user"></i>
                                              Register</a>
                                      </li>
                                  </ul>
                              </div>
                          @endguest
+
+                         @if (isset(auth()->user()->shop))
+                             <div class="header-button">
+                                 <a href="{{ route('user.shop') }}" class="btn"><img
+                                         src="{{ asset('assets/images/shop-default.png') }}" alt=""></a>
+                             </div>
+                         @endif
+                         @auth
+                             <div class="header-button">
+                                 <a href="{{ route('profile') }}" class="btn">
+                                     <img src="{{ asset('assets/images/man-default.png') }}" alt=""></a>
+                             </div>
+                         @endauth
 
                          <div class="button header-button">
                              <a href="{{ route('ad.create') }}" class="btn">Post an Ad</a>
