@@ -80,7 +80,7 @@ Route::get('/my-shop', [ShopController::class, 'user_shop'])
 Route::get('/shops/create', [ShopController::class, 'create'])
     ->name('create.shop')
     ->middleware('auth');
-Route::get('/shops/{shop}', [ShopController::class, 'show'])
+Route::get('/shops/{shop:slug}', [ShopController::class, 'show'])
     ->name('show.shops');
 Route::post('/shops', [ShopController::class, 'store'])
     ->name('store.shop')

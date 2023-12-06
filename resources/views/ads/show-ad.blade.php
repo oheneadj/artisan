@@ -29,11 +29,9 @@
                                     href="javascript:void(0)">{{ $ad->shop->location }}</a></p>
                             <h3 class="price">GH₵{{ $ad->price }}</h3>
                             <div class="list-info">
-                                <h4>Informations</h4>
+                                <h4>Product Summary</h4>
                                 <ul>
-                                    <li><span>Condition:</span> New</li>
-                                    <li><span>Brand:</span> Apple</li>
-                                    <li><span>Model:</span> Mackbook Pro</li>
+                                    <p>{{ $ad->description }}</p>
                                 </ul>
                             </div>
                             <div class="contact-info">
@@ -42,7 +40,7 @@
                                         @auth
                                             <a href="tel:{{ $ad->shop->phone_number }}" class="call">
                                                 <i class="lni lni-phone-set"></i>
-                                                <span>Call {{ $ad->shop->phone_number }}</span>
+                                                <span>Call {{ $ad->shop->name }}</span>
                                             </a>
                                         @endauth
                                         @guest
@@ -83,7 +81,7 @@
                     <div class="col-lg-8 col-md-7 col-12">
                         <!-- Start Single Block -->
                         <div class="single-block description">
-                            <h3>Description</h3>
+                            <h3>Product Detailed Description</h3>
                             <p>{{ $ad->description }}</p>
                         </div>
                         <!-- End Single Block -->
@@ -162,12 +160,16 @@
                         <div class="item-details-sidebar">
                             <!-- Start Single Block -->
                             <div class="single-block author">
-                                <h3>Owner</h3>
+                                <h3>Posted By</h3>
                                 <div class="content">
-                                    <img src="assets/images/testimonial/testi3.jpg" alt="#">
-                                    <h4>{{ $ad->shop->name }}</h4>
+                                    <img width="10000" src="{{ asset('assets/images/default-store.png') }}"
+                                        alt="{{ $ad->shop->name }}-logo">
+                                    <a href="{{ route('show.shops', $ad->shop->slug) }}">
+                                        <h4>{{ $ad->shop->name }}</h4>
+                                    </a>
                                     <span>Member Since {{ $ad->shop->created_at->toFormattedDateString() }}</span>
-                                    <a href="javascript:void(0)" class="see-all">See All Ads</a>
+                                    <a href="{{ route('show.shops', $ad->shop->slug) }}" class="see-all">
+                                        See All Ads</a>
                                 </div>
                             </div>
                             <!-- End Single Block -->

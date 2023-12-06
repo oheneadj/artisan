@@ -90,11 +90,14 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
+
+        $ads = Ad::where('shop_id', $shop->id);
         return view(
-            'shops.show-shop',
+            'shop.show-shop',
             [
                 'page_title' => $shop->name,
-                'ad' => $shop,
+                'shop' => $shop,
+                'ads' => $ads->latest()->paginate(6)
             ]
         );
     }

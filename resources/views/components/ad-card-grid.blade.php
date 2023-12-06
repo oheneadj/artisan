@@ -13,7 +13,7 @@
          </div>
 
          <div class="content">
-             <a href="javascript:void(0)" class="tag">{{ $ad->shop->name }}</a>
+             <a href="{{ route('show.shops', $ad->shop->slug) }}" class="tag">{{ $ad->shop->name }}</a>
              <h3 class="title">
                  <a href="{{ route('ad.single', $ad->slug) }}">{{ $ad->name }}</a>
              </h3>
