@@ -1,6 +1,7 @@
  <div class="dashboard-sidebar">
      <div class="user-image">
-         <img src="{{ asset('assets/images/woman-default.png') }}" alt="#">
+         <img src="{{ auth()->user()->gender === 'male' ? asset('assets/images/man-default.png') : asset('assets/images/woman-default.png') }}"
+             alt="#">
          <h3>{{ auth()->user()->name }}
              <span><a href="javascript:void(0)">{{ '@' . auth()->user()->username }}</a></span>
          </h3>

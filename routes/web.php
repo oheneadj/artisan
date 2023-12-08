@@ -98,9 +98,9 @@ Route::delete('/shops', [ShopController::class, 'destroy'])
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{user}', [UserController::class, 'show']);
+    Route::get('/users/{user:slug}', [UserController::class, 'edit'])->name('show.profile');;
     Route::post('/users', [UserController::class, 'store']);
-    Route::put('/users', [UserController::class, 'update'])->name('edit.profile');
+    Route::post('/users/{user}', [UserController::class, 'update'])->name('update.profile');
     Route::delete('/users', [UserController::class, 'destroy']);
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/messages', [UserController::class, 'messages'])->name('messages');

@@ -59,9 +59,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        return view('user.edit-profile', ['page_title' => 'Edit Your Profile']);
     }
 
     /**
@@ -69,7 +69,16 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = $request->validate([
+            'full_name' => 'required',
+            'location' => 'required',
+            'card_type' => 'required',
+            'card_number' => 'required',
+            'phone_number' => 'required,numeric, size:10',
+            'email' => 'required',
+        ]);
+
+        User::updated($user);
     }
 
     /**

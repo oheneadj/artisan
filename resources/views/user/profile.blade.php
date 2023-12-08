@@ -6,49 +6,63 @@
             <h3 class="block-title">Profile Settings</h3>
             <div class="inner-block">
                 <div class="image">
-                    <img src="assets/images/dashboard/user-image.jpg" alt="#">
+                    <img src="{{ auth()->user()->gender === 'male' ? asset('assets/images/man-default.png') : asset('assets/images/woman-default.png') }}"
+                        alt="{{ auth()->user()->name }}">
                 </div>
                 <form class="profile-setting-form" method="post" action="profile-settings.html#">
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
-                                <label>First Name*</label>
-                                <input name="first-name" type="text" placeholder="Steve">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="form-group">
-                                <label>Last Name*</label>
-                                <input name="last-name" type="text" placeholder="Aldridge">
+                                <label>Full Name*</label>
+                                <p>{{ auth()->user()->name }}</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label>Username*</label>
-                                <input name="usernames" type="text" placeholder="@username">
+                                <p class="green">{{ '@' . auth()->user()->username }}</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
-                                <label>Email Address*</label>
-                                <input name="email" type="email" placeholder="username@gmail.com">
+                                <label>Gender*</label>
+                                <p>{{ auth()->user()->gender }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label>Card*</label>
+                                @if (auth()->user()->card_type === null)
+                                    <p class="red">Unverified</p>
+                                @else
+                                    <p class="dark">{{ auth()->user()->card_type }}
+                                        Number:{{ auth()->user()->card_number }} </p>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group upload-image">
-                                <label>Profile Image*</label>
-                                <input name="profile-image" type="file" placeholder="Upload Image">
+                                <label>Phone Number*</label>
+                                <p>{{ auth()->user()->phone_number }}</p>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="form-group message">
-                                <label>About You*</label>
-                                <textarea name="message" placeholder="Enter about yourself"></textarea>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label>Email*</label>
+                                <p>{{ auth()->user()->email }}</p>
                             </div>
                         </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label>Joined Since*</label>
+                                <p>{{ auth()->user()->created_at->toFormattedDateString() }}</p>
+                            </div>
+                        </div>
+
                         <div class="col-12">
                             <div class="form-group button mb-0">
-                                <button type="submit" class="btn">Update Profile</button>
+                                <a href="{{ route('show.profile', auth()->user()->username) }}" class="btn">Edit
+                                    Profile</a>
                             </div>
                         </div>
                     </div>
