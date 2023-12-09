@@ -29,6 +29,7 @@ return new class extends Migration
             $table->longText('description');
             $table->foreignId('category_id')
                 ->constrained('categories');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

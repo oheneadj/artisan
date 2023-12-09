@@ -61,11 +61,9 @@ class AdController extends Controller
         $ad = Ad::where('name', '=', $formFields['name'])->latest()->first();
 
         if ($ad !== null) {
-            $ad->id;
-            if ($ad->id == 1) {
+
+            if ($ad->id >= 1) {
                 $formFields['slug'] = $formFields['slug'] . "-" . $ad->id;
-            } else {
-                $formFields['slug'] = $formFields['slug'] . "-" . ++$ad->id;
             }
         }
 

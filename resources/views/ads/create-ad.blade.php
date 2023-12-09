@@ -53,9 +53,39 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Add Price*</label>
-                                                <input name="price" type="text" value="{{ old('price') }} "
+                                                <input name="price" type="text" value="{{ old('price') }}"
                                                     placeholder="Enter Price">
                                                 @error('price')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-4">
+                                            <div class="check-and-pass">
+                                                <div class="row align-items-center">
+                                                    <div class="col-lg-6 col-md-6 col-12">
+                                                        <div class="form-check">
+                                                            <input name="sale" value="{{ old('sale') }}"
+                                                                type="checkbox" class="form-check-input width-auto"
+                                                                id="saleCheck">
+                                                            <label for="sale" class="form-check-label">Are You
+                                                                running a special
+                                                                promotion or sale? </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Add <span class="dark">Sale/Discount/Promo</span>
+                                                    Price*</label>
+                                                <input name="sale_price" type="text" value="{{ old('sale_price') }}"
+                                                    placeholder="Enter sale price">
+                                                @error('sale_price')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
@@ -66,14 +96,16 @@
                                                 <div class="selector-head">
                                                     <span class="arrow"><i class="lni lni-chevron-down"></i></span>
                                                     <select name="category_id" class="user-chosen-select">
-                                                        <option value="none">Select Category
+                                                        <option value="">Select Ad Category
                                                         </option>
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">{{ $category->name }}
                                                             </option>
                                                         @endforeach
-
                                                     </select>
+                                                    @error('category_id')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -113,6 +145,9 @@
                                             <div class="form-group mt-30">
                                                 <label>Ad Description*</label>
                                                 <textarea name="description" placeholder="Input ad description">{{ old('description') }}</textarea>
+                                                @error('description')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-12">

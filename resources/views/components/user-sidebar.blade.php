@@ -34,10 +34,7 @@
              @endif
              <li><a class="@if (Route::current()->getName() == 'messages') {{ 'active' }} @endif"
                      href="{{ route('messages') }}"><i class="lni lni-envelope"></i> Messages</a></li>
-
-
              <li><a href="#"><i class="lni lni-trash red"></i> Close account</a></li>
-
          </ul>
          <div class="button">
              <a class="btn" href="javascript:void(0)">Logout</a>

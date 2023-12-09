@@ -112,7 +112,7 @@
                                                 <input type="file" id="upload" name="upload">
                                                 <label for="upload" class="content text-center">
                                                     <span class="text">
-                                                        <span class="d-block mb-15">Drop files anywhere
+                                                        <span class="d-block mb-15">Drop file anywhere
                                                             to Upload</span>
                                                         <span class="mb-15 plus-icon"><i
                                                                 class="lni lni-plus"></i></span>

@@ -32,6 +32,7 @@ return new class extends Migration
                 ->nullable();
             $table->timestamp('verified_at')
                 ->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
