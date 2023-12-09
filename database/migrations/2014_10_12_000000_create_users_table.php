@@ -13,19 +13,32 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('profile_picture')
+                ->nullable();
             $table->string('name');
-            $table->string('username')->unique();;
+            $table->string('username')
+                ->unique();;
             $table->string('gender');
-            $table->string('date_of_birth');
+            $table->date('date_of_birth');
             $table->string('location');
-            $table->string('card_type')->nullable();
-            $table->string('card_number')->nullable();
-            $table->string('verified')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->timestamp('phone_number_verified_at')->nullable();
-            $table->string('user_type')->nullable();
-            $table->string('email')->nullable()->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('card_type')
+                ->nullable();
+            $table->string('card_number')
+                ->nullable();
+            $table->boolean('verified')
+                ->default(false);
+            $table->string('phone_number')
+                ->nullable()
+                ->unique();
+            $table->timestamp('phone_number_verified_at')
+                ->nullable();
+            $table->string('user_type')
+                ->nullable();
+            $table->string('email')
+                ->nullable()
+                ->unique();
+            $table->timestamp('email_verified_at')
+                ->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

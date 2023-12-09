@@ -52,6 +52,15 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
+                                                <label>Shop Description</label>
+                                                <textarea name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
+                                                @error('description')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
                                                 <label>Shop Location</label>
                                                 <input name="location" value="{{ old('location') }}" type="text"
                                                     placeholder="Enter Shop Location">
@@ -70,22 +79,35 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        {{-- <div class="col-12">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Certificate Number</label>
+                                                <input name="certificate_number" value="{{ old('certificate_number') }}"
+                                                    type="text" placeholder="Enter Your Business certificate number">
+                                                @error('certificate_number')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <label>Select Shop Type*</label>
                                                 <div class="selector-head">
                                                     <span class="arrow"><i class="lni lni-chevron-down"></i></span>
-                                                    <select class="user-chosen-select">
-                                                        <option value="none">Select an option
+                                                    <select name="shop_type" class="user-chosen-select">
+                                                        <option value="">Select an option
                                                         </option>
                                                         <option value="hair dresser">Hair Dresser</option>
                                                         <option value="tailor">Tailor</option>
                                                     </select>
+                                                    @error('shop_type')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-12">
-                                            <label>Upload Shop Logo*</label>
+                                            <label class="mb-2">Upload Shop Logo*</label>
                                             <div class="upload-input">
                                                 <input type="file" id="upload" name="upload">
                                                 <label for="upload" class="content text-center">
@@ -111,14 +133,9 @@
                                                         class="lni lni-plus"></i> Add Video</a>
                                             </div>
                                         </div>
+
                                         <div class="col-12">
-                                            <div class="form-group mt-30">
-                                                <label>Shop Description*</label>
-                                                <textarea name="message" placeholder="Input ad description"></textarea>
-                                            </div>
-                                        </div> --}}
-                                        <div class="col-12">
-                                            <div class="form-group button mb-0">
+                                            <div class="form-group button mb-0 mt-5">
 
                                                 <button type="submit" class="btn">Create My Shop</button>
                                             </div>

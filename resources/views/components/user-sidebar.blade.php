@@ -15,6 +15,12 @@
                      href="{{ route('ads.favourites') }}"><i class="lni lni-heart"></i> Favourite ads</a></li>
              <li><a class="@if (Route::current()->getName() == 'ads.bookmarked') {{ 'active' }} @endif"
                      href="{{ route('ads.bookmarked') }}"><i class="lni lni-bookmark"></i> Bookmarked</a></li>
+             {{-- If user hasn't created a shop. show the link to create a shop --}}
+             @if (auth()->user()->shop === null)
+                 <li><a class="@if (Route::current()->getName() == 'create.shop') {{ 'active' }} @endif"
+                         href="{{ route('create.shop') }}"><i class="lni lni-printer"></i>Create your shop</a></li>
+             @endif
+             {{-- If user has creted a shop, show the shop associated links --}}
              @if (auth()->user()->shop != null)
                  <li><a class="@if (Route::current()->getName() == 'dashboard') {{ 'active' }} @endif"
                          href="{{ route('dashboard') }}"><i class="lni lni-dashboard"></i>Shop Dashboard</a></li>

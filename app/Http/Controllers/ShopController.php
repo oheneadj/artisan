@@ -59,6 +59,9 @@ class ShopController extends Controller
             'name' => ['required', 'min:3'],
             'location' => ['required'],
             'phone_number' => ['required', 'numeric', 'digits:10', 'unique:shops,phone_number'],
+            'description' => ['required'],
+            'certificate_number' => ['required'],
+            'shop_type' => ['required']
         ]);
 
         $formFields['slug'] = Str::slug($formFields['name']);

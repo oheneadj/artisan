@@ -17,12 +17,18 @@ return new class extends Migration
                 ->constrained('users')
                 ->onDelete('cascade');
             $table->string('name');
+            $table->string('logo')
+                ->nullable();
             $table->string('slug');
             $table->string('location');
             $table->string('phone_number');
+            $table->longText('description');
+            $table->string('video_url')
+                ->nullable();
             $table->string('certificate_number')
                 ->nullable();
             $table->boolean('verified')
+                ->default(false)
                 ->nullable();
             $table->timestamp('verified_at')
                 ->nullable();

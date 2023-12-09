@@ -21,7 +21,11 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('name');
             $table->string('slug');
-            $table->string('price');
+            $table->decimal('price');
+            $table->decimal('sale_price')
+                ->nullable();
+            $table->boolean('sale')
+                ->default(false);
             $table->longText('description');
             $table->foreignId('category_id')
                 ->constrained('categories');
