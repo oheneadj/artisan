@@ -162,7 +162,7 @@
                             <div class="single-block author">
                                 <h3>Posted By</h3>
                                 <div class="content">
-                                    <img src="{{ asset('assets/images/shop-default.png') }}"
+                                    <img src="{{ isset($ad->shop->logo) ? asset('images/' . $ad->shop->logo) : asset('assets/images/shop-default.png') }}"
                                         alt="{{ $ad->shop->name }}-logo">
                                     <a href="{{ route('show.shops', $ad->shop->slug) }}">
                                         <h4>{{ $ad->shop->name }}</h4>

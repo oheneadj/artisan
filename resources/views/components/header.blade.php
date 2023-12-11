@@ -59,8 +59,9 @@
 
                          @if (isset(auth()->user()->shop))
                              <div class="header-button">
-                                 <a href="{{ route('user.shop') }}" class="btn"><img
-                                         src="{{ asset('assets/images/shop-default.png') }}" alt=""></a>
+                                 <a href="{{ route('user.shop') }}" class="btn"> <img
+                                         src="{{ isset($shop->logo) ? asset('images/' . $shop->logo) : asset('assets/images/shop-default.png') }}"
+                                         alt="#"></a>
                              </div>
                          @endif
                          @auth

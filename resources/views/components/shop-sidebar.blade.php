@@ -1,6 +1,7 @@
  <div class="dashboard-sidebar">
      <div class="user-image">
-         <img src="{{ asset('assets/images/shop-default.png') }}" alt="#">
+         <img src="{{ isset($shop->logo) ? asset('images/' . $shop->logo) : asset('assets/images/shop-default.png') }}"
+             alt="#">
          <h3>{{ $shop->name }}
              <span style="color: rgb(173, 173, 173)">{{ '@' . $shop->slug }}</span>
          </h3>

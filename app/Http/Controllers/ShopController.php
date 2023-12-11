@@ -48,12 +48,12 @@ class ShopController extends Controller
     public function store(Request $request)
     {
 
+
         // Check if user already has a shop
         if (Shop::where('user_id', auth()->user()->id)->first() != null) {
             //if user has a shop, return to user shop
             return redirect(route('user.shop'));
         }
-
 
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
@@ -61,12 +61,24 @@ class ShopController extends Controller
             'phone_number' => ['required', 'numeric', 'digits:10', 'unique:shops,phone_number'],
             'description' => ['required'],
             'certificate_number' => ['required'],
-            'shop_type' => ['required']
+            'shop_type' => ['required'],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'video' => ['nullable', 'url'],
         ]);
+
+        if ($request->image) {
+            $image = time() . rand(1, 999) . '.' . $request->image->extension();
+
+            $request->image->move(public_path('images'), $image);
+            $formFields['logo'] = $image;
+        }
+
+
+
+
 
         $formFields['slug'] = Str::slug($formFields['name']);
         $formFields['user_id'] = auth()->user()->id;
-
 
 
         if (Shop::create($formFields)) {

@@ -37,7 +37,8 @@
                             aria-labelledby="nav-item-info-tab">
                             <!-- Start Post Ad Step One Content -->
                             <div class="step-two-content">
-                                <form class="default-form-style" method="post" action="{{ route('store.shop') }}">
+                                <form class="default-form-style" method="post" action="{{ route('store.shop') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-12">
@@ -107,9 +108,10 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-12">
-                                            <label class="mb-2">Upload Shop Logo*</label>
+                                            <label class="mb-2">Upload Shop image*</label>
                                             <div class="upload-input">
-                                                <input type="file" id="upload" name="upload">
+                                                <input type="file" id="upload" name="image"
+                                                    value="{{ old('image') }}">
                                                 <label for="upload" class="content text-center">
                                                     <span class="text">
                                                         <span class="d-block mb-15">Drop file anywhere
@@ -122,20 +124,26 @@
                                                             10Mb</span>
                                                     </span>
                                                 </label>
+
                                             </div>
+                                            @error('image')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
                                                 <label class="video-label">Video Link* <span>Input only
                                                         YouTube &amp; Vimeo</span></label>
-                                                <input name="video" type="text" placeholder="Input link">
-                                                <a href="javascript:void(0)" class="add-video"><i
-                                                        class="lni lni-plus"></i> Add Video</a>
+                                                <input name="video" type="text" placeholder="Input link"
+                                                    value="{{ old('video') }}">
+                                                @error('video')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-12">
-                                            <div class="form-group button mb-0 mt-5">
+                                            <div class="form-group button mb-0 mt-3">
 
                                                 <button type="submit" class="btn">Create My Shop</button>
                                             </div>
