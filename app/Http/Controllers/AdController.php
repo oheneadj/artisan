@@ -7,11 +7,17 @@ use App\Models\Shop;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Category;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+/**
+ *
+ */
 class AdController extends Controller
 {
     /**
@@ -43,35 +49,39 @@ class AdController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param Request $request
+     * @return Application|\Illuminate\Foundation\Application|RedirectResponse|Redirector
+     * @throws \Exception
      */
     public function store(Request $request)
     {
 
         $formFields = $request->validate([
-            'name' => 'required', 'min:3',
-            'price' => 'required', 'numeric',
-            'description' => 'required',
+            'name' => 'required|min:3',
+            'price' => 'required|numeric',
+            'description' => 'required|max:500',
             'category_id' => 'required',
             'images' => 'required',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'sale'=> 'nullable',
+            'sale_price' => 'nullable|numeric'
         ]);
+    if($request->sale !== null){
+        $formFields['sale'] = '1';
+    }
+
+
 
         $formFields['slug'] = Str::slug($formFields['name']);
 
         $ad = Ad::where('name', '=', $formFields['name'])->latest()->first();
 
-        if ($ad !== null) {
-
-            if ($ad->id >= 1) {
-                $formFields['slug'] = $formFields['slug'] . "-" . $ad->id;
-            }
+        if (($ad !== null) && $ad->id >= 1) {
+            $formFields['slug'] .= "-" . $ad->id;
         }
 
         $formFields['user_id'] = auth()->user()->id;
-        $formFields['shop_id'] = Shop::where('user_id', '=', auth()->user()->id)->first()->id;
-        //$formFields['category_id'] = 1;
-
-
+        $formFields['shop_id'] = auth()->user()->shop->id;
 
         $ad = Ad::create($formFields);
 
@@ -79,7 +89,7 @@ class AdController extends Controller
 
             if ($formFields['images']) {
                 foreach ($formFields['images'] as $image) {
-                    $imageName = time() . rand(1, 999) . '.' . $image->extension();
+                    $imageName = time() . random_int(1, 999) . '.' . $image->extension();
 
                     $image->move(public_path('images'), $imageName);
 
@@ -92,9 +102,9 @@ class AdController extends Controller
 
             return  redirect(route('ad.single', $ad->slug))
                 ->with('success', 'Ad created successfully ');
-        } else {
-            return redirect('/about')->with('danger', 'Ad creation unsuccessfully');
         }
+
+        return back()->with('danger', 'There was a problem creating your Ad please try again');
     }
 
     /**

@@ -41,11 +41,7 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        if (User::create($data)) {
-            return $data['first_name'];
-        } else {
-            return "Error creating service";
-        }
+        return User::create($data) ? $data['first_name'] : "Error creating service";
     }
 
     /**
@@ -91,7 +87,8 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        return view('user.dashboard', ['page_title' => 'Post Ad']);
+        return view('user.dashboard',
+            ['page_title' => 'Dashboard']);
     }
 
     public function profile()

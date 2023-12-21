@@ -8,8 +8,11 @@
              <a href="{{ route('ad.single', $ad->slug) }}">
                  <img class="image-card" src="/images/{{ $ad->image->first()->name }}" alt="{{ $ad->name }}">
              </a>
-             <i class="cross-badge lni lni-bolt"></i>
-             <span class="flat-badge sale">Sale</span>
+             @if($ad->sale === 1)
+                 <i class="cross-badge lni lni-bolt"></i>
+                 <span class="flat-badge sale">Sale</span>
+             @endif
+
          </div>
 
          <div class="content">

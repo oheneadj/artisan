@@ -27,7 +27,12 @@
                             <h2 class="title">{{ $ad->name }}</h2>
                             <p class="location"><i class="lni lni-map-marker"></i><a
                                     href="javascript:void(0)">{{ $ad->shop->location }}</a></p>
-                            <h3 class="price">GH₵{{ $ad->price }}</h3>
+                           @if($ad->sale === 1)
+                                <h3 class="price">GH₵{{ $ad->sale_price }}</h3>
+                                <p class="dark"><del>GH₵{{ $ad->price }}</del> </p>
+                            @else
+                                <h3 class="price d-inline">GH₵{{ $ad->price }}</h3>
+                           @endif
                             <div class="list-info">
                                 <h4>Product Summary</h4>
                                 <ul>

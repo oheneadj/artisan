@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 <label>Password</label>
                                 <input name="password" value="{{ old('password') }}" type="password" placeholder="">
-                                @error('password required')
+                                @error('password')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>

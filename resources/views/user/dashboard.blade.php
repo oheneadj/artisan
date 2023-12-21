@@ -10,7 +10,7 @@
                             <i class="lni lni-checkmark-circle"></i>
                         </div>
                         <h3>
-                            340
+                            {{auth()->user()->ads->count()}}
                             <span>Total Ad Posted</span>
                         </h3>
                     </div>
@@ -23,8 +23,8 @@
                             <i class="lni lni-bolt"></i>
                         </div>
                         <h3>
-                            23
-                            <span>Featured Ads </span>
+                            {{auth()->user()->ads->where('sale', '!=', '0')->count()}}
+                            <span>Sales/Promo Ads </span>
                         </h3>
                     </div>
                     <!-- End Single List -->
@@ -100,42 +100,17 @@
                 <div class="recent-items dashboard-block">
                     <h3 class="block-title">Recent Ads</h3>
                     <ul>
-                        <li>
-                            <div class="image">
-                                <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item1.jpg"
-                                        alt="#"></a>
-                            </div>
-                            <a href="javascript:void(0)" class="title">iPhone 11 Pro Max</a>
-                            <span class="time">12 Minutes Ago</span>
-                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                        </li>
-                        <li>
-                            <div class="image">
-                                <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item2.jpg"
-                                        alt="#"></a>
-                            </div>
-                            <a href="javascript:void(0)" class="title">Polaris 600 Assault 144</a>
-                            <span class="time">5 days Ago</span>
-                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                        </li>
-                        <li>
-                            <div class="image">
-                                <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item3.jpg"
-                                        alt="#"></a>
-                            </div>
-                            <a href="javascript:void(0)" class="title">Brand New Bagpack</a>
-                            <span class="time">1 week Ago</span>
-                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                        </li>
-                        <li>
-                            <div class="image">
-                                <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item4.jpg"
-                                        alt="#"></a>
-                            </div>
-                            <a href="javascript:void(0)" class="title">Honda Civic VTi 2023</a>
-                            <span class="time">3 week Ago</span>
-                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                        </li>
+                        @foreach(auth()->user()->ads as $ad)
+                            <li>
+                                <div class="image">
+                                    <a href="javascript:void(0)"><img src="assets/images/dashboard/recent-items/item1.jpg"
+                                                                      alt="#"></a>
+                                </div>
+                                <a href="javascript:void(0)" class="title">{{$ad->name}}</a>
+                                <span class="time">{{$ad->created_at->diffForHumans()}}</span>
+                                <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                            </li>
+                        @endforeachs
                     </ul>
                 </div>
                 <!-- End Recent Items -->

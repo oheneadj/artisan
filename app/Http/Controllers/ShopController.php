@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ad;
+use App\Models\Category;
 use App\Models\Shop;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
@@ -15,9 +19,10 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('ads.index', [
-            "ads" => Ad::with('shop')->latest()
-                ->paginate(6)
+        return view('shop.index', [
+            "shops" => Shop::with('ad')->latest()
+                ->paginate(6),
+            "categories" => Category::get()
         ]);
     }
 
@@ -33,6 +38,7 @@ class ShopController extends Controller
             return redirect(route('user.shop'));
         }
 
+        //return user to create shop page
         return view(
             'shop.create',
             [
@@ -59,7 +65,7 @@ class ShopController extends Controller
             'name' => ['required', 'min:3'],
             'location' => ['required'],
             'phone_number' => ['required', 'numeric', 'digits:10', 'unique:shops,phone_number'],
-            'description' => ['required'],
+            'description' => ['required', 'max:250'],
             'certificate_number' => ['required'],
             'shop_type' => ['required'],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
@@ -67,15 +73,11 @@ class ShopController extends Controller
         ]);
 
         if ($request->image) {
-            $image = time() . rand(1, 999) . '.' . $request->image->extension();
+            $image = time() . random_int(1, 999) . '.' . $request->image->extension();
 
             $request->image->move(public_path('images'), $image);
             $formFields['logo'] = $image;
         }
-
-
-
-
 
         $formFields['slug'] = Str::slug($formFields['name']);
         $formFields['user_id'] = auth()->user()->id;
@@ -91,13 +93,13 @@ class ShopController extends Controller
 
                 return redirect(route($URL))
                     ->with('success', 'Shop created successfully. You can now create your ads');
-            } else {
-                return  redirect(route('user.shop'))
-                    ->with('success', 'Shop created successfully ');
             }
-        } else {
-            return back()->with('danger', 'Shop creation unsuccessfully');
+
+            return  redirect(route('user.shop'))
+                ->with('success', 'Shop created successfully ');
         }
+
+        return back()->with('danger', 'Shop creation unsuccessfully');
     }
 
     /**
@@ -141,14 +143,19 @@ class ShopController extends Controller
         //
     }
 
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
     public function user_shop()
     {
 
+        $ads = Ad::where('shop_id', auth()->user()->shop->id);
         return view(
-            'shop.index',
+            'shop.show-shop',
             [
-                "shop" => Shop::where('user_id', auth()->user()->id)->first(),
-                'page_title' => "My Shop"
+                'page_title' => auth()->user()->shop->name,
+                'shop' => auth()->user()->shop,
+                'ads' => $ads->latest()->paginate(6)
             ]
         );
     }

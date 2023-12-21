@@ -32,7 +32,8 @@
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label>Gender*</label>
-                                <input name="gender" value="{{ auth()->user()->gender }}" type="text" disabled>
+                                <p>{{ auth()->user()->gender }}</p>
+
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">

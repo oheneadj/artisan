@@ -49,7 +49,6 @@ Route::delete('/ads', [AdController::class, 'destroy'])
     ->middleware('auth');
 
 
-
 //Comment
 Route::post('/ads/{ad}/comment', [CommentController::class, 'store'])
     ->name('comment.store');
@@ -106,7 +105,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/messages', [UserController::class, 'messages'])->name('messages');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 });
-
 
 
 

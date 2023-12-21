@@ -66,7 +66,7 @@
                                                 <div class="row align-items-center">
                                                     <div class="col-lg-6 col-md-6 col-12">
                                                         <div class="form-check">
-                                                            <input name="sale" value="{{ old('sale') }}"
+                                                            <input onload="saleToggle()" id="sale_check" name="sale" {{ old('sale') ? 'checked' : ''}}"
                                                                 type="checkbox" class="form-check-input width-auto"
                                                                 id="saleCheck">
                                                             <label for="sale" class="form-check-label">Are You
@@ -80,10 +80,10 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <div class="form-group">
+                                            <div class="form-group d-none" id="sale_price">
                                                 <label>Add <span class="dark">Sale/Discount/Promo</span>
                                                     Price*</label>
-                                                <input name="sale_price" type="text" value="{{ old('sale_price') }}"
+                                                <input  name="sale_price"  type="text" value="{{ old('sale_price') }}"
                                                     placeholder="Enter sale price">
                                                 @error('sale_price')
                                                     <small class="text-danger">{{ $message }}</small>
