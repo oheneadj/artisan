@@ -12,7 +12,6 @@
                  <i class="cross-badge lni lni-bolt"></i>
                  <span class="flat-badge sale">Sale</span>
              @endif
-
          </div>
 
          <div class="content">
@@ -23,8 +22,19 @@
              <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
                      </i>{{ $ad->shop->location }}</a></p>
              <ul class="info">
-                 <li class="price">GH₵{{ $ad->price }}</li>
-                 <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
+                 @if($ad->sale === 1)
+                     <li class="price">GH₵{{ $ad->sale_price }}</li>
+                     <li class="">&nbsp; <del>GH₵{{ $ad->price }}</del></li>
+                 @else
+                     <li class="price">GH₵{{ $ad->price }}</li>
+                 @endif
+
+                 @auth()
+                        @if(auth()->user()->id === $ad->user_id)
+                             <li class="like"><a href="{{route('ad.edit', $ad->slug)}}"><i class="lni lni-pencil"></i></a>
+                         @endif
+                 @endauth
+                    <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
                  </li>
              </ul>
          </div>

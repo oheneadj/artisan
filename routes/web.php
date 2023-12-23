@@ -36,14 +36,19 @@ Route::get('/ads', [AdController::class, 'index'])
 Route::get('/ads/create', [AdController::class, 'create'])
     ->name('ad.create')
     ->middleware('auth');
+Route::get('/ads/edit/{ad:slug}', [AdController::class, 'edit'])
+    ->name('ad.edit')
+    ->middleware('auth');
+Route::post('/ads/{ad:slug}', [AdController::class, 'update'])
+    ->name('ad.update')
+    ->middleware('auth');
 Route::get('/ads/{ad:slug}', [AdController::class, 'show'])
     ->name('ad.single');
 Route::post('/ads', [AdController::class, 'store'])
     ->name('ad.new')
     ->middleware('auth');
-Route::put('/ads', [AdController::class, 'update'])
-    ->name('ad.update')
-    ->middleware('auth');
+
+
 Route::delete('/ads', [AdController::class, 'destroy'])
     ->name('ad.delete')
     ->middleware('auth');

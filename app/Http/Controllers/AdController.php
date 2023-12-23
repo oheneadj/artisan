@@ -66,11 +66,10 @@ class AdController extends Controller
             'sale'=> 'nullable',
             'sale_price' => 'nullable|numeric'
         ]);
-    if($request->sale !== null){
+
+    if ($request->sale !== null){
         $formFields['sale'] = '1';
     }
-
-
 
         $formFields['slug'] = Str::slug($formFields['name']);
 
@@ -124,17 +123,71 @@ class AdController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Ad $ad)
     {
-        //
+        return auth()->user()->id !== $ad->user_id ? back() : view(
+            'ads.edit-ad',
+            [
+                'page_title' => 'Edit Ad',
+                'ad' => $ad,
+                'categories' => Category::get()
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Ad $ad)
     {
-        //
+        $formFields = $request->validate([
+            'name' => 'required|min:3',
+            'price' => 'required|numeric',
+            'description' => 'required|max:500',
+            'category_id' => 'required',
+            'images' => 'required',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'sale'=> 'nullable',
+            'sale_price' => 'nullable|numeric'
+        ]);
+
+        if ($request->sale !== null){
+            $formFields['sale'] = '1';
+        }
+
+        $formFields['slug'] = Str::slug($formFields['name']);
+
+        $ad = Ad::where('name', '=', $formFields['name'])->latest()->first();
+
+        if (($ad !== null) && $ad->id >= 1) {
+            $formFields['slug'] .= "-" . $ad->id;
+        }
+
+        $formFields['user_id'] = auth()->user()->id;
+        $formFields['shop_id'] = auth()->user()->shop->id;
+
+        $ad = Ad::create($formFields);
+
+        if ($ad) {
+
+            if ($formFields['images']) {
+                foreach ($formFields['images'] as $image) {
+                    $imageName = time() . random_int(1, 999) . '.' . $image->extension();
+
+                    $image->move(public_path('images'), $imageName);
+
+                    Image::create([
+                        'name' => $imageName,
+                        'ad_id' => $ad['id']
+                    ]);
+                }
+            }
+
+            return  redirect(route('ad.single', $ad->slug))
+                ->with('success', 'Ad created successfully ');
+        }
+
+        return back()->with('danger', 'There was a problem creating your Ad please try again');
     }
 
     /**

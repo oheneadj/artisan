@@ -66,7 +66,7 @@
                                                 <div class="row align-items-center">
                                                     <div class="col-lg-6 col-md-6 col-12">
                                                         <div class="form-check">
-                                                            <input onload="saleToggle()" id="sale_check" name="sale" {{ old('sale') ? 'checked' : ''}}"
+                                                            <input onload="saleToggle()" id="sale_check" name="sale" {{ old('sale') ? 'checked' : ''}}
                                                                 type="checkbox" class="form-check-input width-auto"
                                                                 id="saleCheck">
                                                             <label for="sale" class="form-check-label">Are You

@@ -10,8 +10,6 @@
                                     <img class="single-ad" height="350" src="/images/{{ $ad->image->first()->name }}"
                                         id="current" alt="#">
                                 </div>
-
-
                                 <div class="images single-ad-img">
                                     @foreach ($ad->image as $image)
                                         <img height="60" src="/images/{{ $image->name }}"
