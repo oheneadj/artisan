@@ -39,7 +39,7 @@
                                 <form class="default-form-style" method="post" action="{{ route('ad.update', $ad->slug) }}"
                                       enctype="multipart/form-data">
                                     @csrf
-                                    @METHOD('PUT')
+                                    @method('PUT')
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
@@ -127,21 +127,21 @@
                                         <div class="col-12">
                                             <label class="text-dark mb-3"><b>Ad Pictures
                                                     {{ '(6 Maximum)' }}*</b></label>
-                                            <div class="upload-input">
-                                                <ul>
-                                                    @foreach($ad->image as $image)
-                                                        <li class="d-inline"><img width="100" height="100" src="/images/{{ $image->name }}"
-                                                                 class="" alt="#">
-                                                        </li>
-                                                    @endforeach
 
-                                                </ul>
-                                            </div>
+                                            <ul>
+                                                @foreach($ad->image as $image)
+                                                    <li class="d-inline"><img width="100" height="100" src="/images/{{ $image->name }}"
+                                                                              class="" alt="#">
+                                                    </li>
+                                                @endforeach
+
+                                            </ul>
+
                                         <div class="col-12">
                                             <label class="text-dark mb-3"><b>Upload Pictures
                                                     {{ '(6 Maximum)' }}*</b></label>
                                             <div class="upload-input">
-                                                <input type="file" id="upload" value="{{ old('images') }}"
+                                                <input type="file" id="upload" value="{{ old('images') ?? $ad->image }}"
                                                        name="images[]" multiple>
                                                 <label for="upload" class="content text-center">
                                                     <span class="text">
@@ -183,6 +183,7 @@
                                                 <button type="submit" class="btn">Update Ad</button>
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </form>
                             </div>

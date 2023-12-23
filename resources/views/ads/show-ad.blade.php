@@ -22,7 +22,16 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
-                            <h2 class="title">{{ $ad->name }}</h2>
+                            <div class="d-flex justify-content-between">
+                                <h2 class="title">{{ $ad->name }}</h2>
+                                @auth()
+                                    @if(auth()->user()->id === $ad->user_id)
+                                        <a href="{{route('ad.edit', $ad->slug)}}">
+                                            <i class="lni lni-pencil text-danger"> Edit</i>
+                                        </a>
+                                        @endif
+                                    @endauth
+                            </div>
                             <p class="location"><i class="lni lni-map-marker"></i><a
                                     href="javascript:void(0)">{{ $ad->shop->location }}</a></p>
                            @if($ad->sale === 1)

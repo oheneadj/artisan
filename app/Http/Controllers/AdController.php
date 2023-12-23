@@ -67,16 +67,14 @@ class AdController extends Controller
             'sale_price' => 'nullable|numeric'
         ]);
 
-    if ($request->sale !== null){
-        $formFields['sale'] = '1';
-    }
+        if($request->sale !== null) $formFields['sale'] = '1';
 
         $formFields['slug'] = Str::slug($formFields['name']);
 
-        $ad = Ad::where('name', '=', $formFields['name'])->latest()->first();
+        $ad = Ad::where('name', '=', $formFields['name'])->latest()->count();
 
-        if (($ad !== null) && $ad->id >= 1) {
-            $formFields['slug'] .= "-" . $ad->id;
+        if (($ad !== null) && $ad >= 1) {
+            $formFields['slug'] .= "-" . $ad;
         }
 
         $formFields['user_id'] = auth()->user()->id;
@@ -145,33 +143,33 @@ class AdController extends Controller
             'price' => 'required|numeric',
             'description' => 'required|max:500',
             'category_id' => 'required',
-            'images' => 'required',
+            'images' => 'nullable|max:6',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'sale'=> 'nullable',
             'sale_price' => 'nullable|numeric'
         ]);
 
-        if ($request->sale !== null){
-            $formFields['sale'] = '1';
-        }
+        $request->sale !== null ? $formFields['sale'] = '1' :$formFields['sale'] = '0';
 
         $formFields['slug'] = Str::slug($formFields['name']);
 
-        $ad = Ad::where('name', '=', $formFields['name'])->latest()->first();
+        $single_ad = Ad::where('name', '=', $formFields['name'])->latest()->count();
 
-        if (($ad !== null) && $ad->id >= 1) {
-            $formFields['slug'] .= "-" . $ad->id;
+        if (($single_ad !== null) && $single_ad >= 1) {
+            $formFields['slug'] .= "-" . $single_ad;
         }
 
-        $formFields['user_id'] = auth()->user()->id;
-        $formFields['shop_id'] = auth()->user()->shop->id;
 
-        $ad = Ad::create($formFields);
+
+        $ad->update($formFields);
 
         if ($ad) {
 
-            if ($formFields['images']) {
+            if (isset($formFields['images'])) {
                 foreach ($formFields['images'] as $image) {
+
+
+
                     $imageName = time() . random_int(1, 999) . '.' . $image->extension();
 
                     $image->move(public_path('images'), $imageName);

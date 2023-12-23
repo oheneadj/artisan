@@ -39,7 +39,7 @@ Route::get('/ads/create', [AdController::class, 'create'])
 Route::get('/ads/edit/{ad:slug}', [AdController::class, 'edit'])
     ->name('ad.edit')
     ->middleware('auth');
-Route::post('/ads/{ad:slug}', [AdController::class, 'update'])
+Route::put('/ads/{ad:slug}/update', [AdController::class, 'update'])
     ->name('ad.update')
     ->middleware('auth');
 Route::get('/ads/{ad:slug}', [AdController::class, 'show'])
