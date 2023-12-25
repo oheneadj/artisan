@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Ad;
 use App\Models\Shop;
+use App\Models\TempImage;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +41,7 @@ class AdController extends Controller
     public function create(Request $request)
     {
         // Check to see if user has already created a shop else take him to shop create page
-        if (Shop::where('user_id', auth()->user()->id)->first() == null) {
+        if (Shop::where('user_id', auth()->user()->id)->first() === null) {
             // store the intended link in session
             session(['intendedURL' => Route::currentRouteName()]);
             return redirect(route('create.shop'));
@@ -56,16 +59,26 @@ class AdController extends Controller
     public function store(Request $request)
     {
 
-        $formFields = $request->validate([
+        $validator = Validator::make( $request->all(), [
             'name' => 'required|min:3',
             'price' => 'required|numeric',
             'description' => 'required|max:500',
             'category_id' => 'required',
-            'images' => 'required',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image' => 'required',
             'sale'=> 'nullable',
             'sale_price' => 'nullable|numeric'
         ]);
+
+        if($validator->fails()){
+            $temp_images = TempImage::where('user_id', auth()->user()->id)->get();
+            foreach ($temp_images as $temp_image){
+                Storage::deleteDirectory('images/tmp/'. $temp_image->folder);
+                $temp_image->delete();
+            }
+            return back()->withErrors($validator)->withinput();
+        }
+
+        $formFields = $validator->validated();
 
         if($request->sale !== null) $formFields['sale'] = '1';
 
@@ -83,19 +96,20 @@ class AdController extends Controller
         $ad = Ad::create($formFields);
 
         if ($ad) {
+            $temp_images = TempImage::where('user_id', auth()->user()->id)->get();
+            foreach ($temp_images as $image){
 
-            if ($formFields['images']) {
-                foreach ($formFields['images'] as $image) {
-                    $imageName = time() . random_int(1, 999) . '.' . $image->extension();
+                    //$image_name = time() . random_int(1, 999) . $image->file;
 
-                    $image->move(public_path('images'), $imageName);
+                Storage::copy('tmp/'. $image->folder . '/' . $image->file,  'images' .'/'. $image->file);
 
                     Image::create([
-                        'name' => $imageName,
+                        'name' => $image->file,
                         'ad_id' => $ad['id']
                     ]);
+                Storage::deleteDirectory('tmp/'. $image->folder);
+                $image->delete();
                 }
-            }
 
             return  redirect(route('ad.single', $ad->slug))
                 ->with('success', 'Ad created successfully ');
@@ -163,22 +177,20 @@ class AdController extends Controller
 
         $ad->update($formFields);
 
-        if ($ad) {
+        if($ad){
+            $temp_images = TempImage::where('user_id', auth()->user()->id)->get();
+            foreach ($temp_images as $image){
 
-            if (isset($formFields['images'])) {
-                foreach ($formFields['images'] as $image) {
+                //$image_name = time() . random_int(1, 999) . $image->file;
 
+                Storage::copy('tmp/'. $image->folder . '/' . $image->file,  'images' .'/'. $image->file);
 
-
-                    $imageName = time() . random_int(1, 999) . '.' . $image->extension();
-
-                    $image->move(public_path('images'), $imageName);
-
-                    Image::create([
-                        'name' => $imageName,
-                        'ad_id' => $ad['id']
-                    ]);
-                }
+                Image::create([
+                    'name' => $image->file,
+                    'ad_id' => $ad['id']
+                ]);
+                Storage::deleteDirectory('tmp/'. $image->folder);
+                $image->delete();
             }
 
             return  redirect(route('ad.single', $ad->slug))
@@ -193,7 +205,7 @@ class AdController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd('Here');
     }
 
     public function myAds()

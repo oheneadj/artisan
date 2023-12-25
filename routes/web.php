@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\AuthController;
@@ -49,10 +50,17 @@ Route::post('/ads', [AdController::class, 'store'])
     ->middleware('auth');
 
 
-Route::delete('/ads', [AdController::class, 'destroy'])
+Route::delete('/ads/ad/{ad}', [AdController::class, 'destroy'])
     ->name('ad.delete')
     ->middleware('auth');
 
+/**
+Images
+ **/
+Route::middleware(['auth'])->group(function () {
+    Route::post('/upload', [ImageController::class, 'upload']);
+    Route::delete('/delete', [ImageController::class, 'delete']);
+});
 
 //Comment
 Route::post('/ads/{ad}/comment', [CommentController::class, 'store'])

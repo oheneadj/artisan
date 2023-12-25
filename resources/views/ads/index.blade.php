@@ -18,6 +18,8 @@
                                     <div class="tab-pane fade show active" id="nav-grid" role="tabpanel"
                                         aria-labelledby="nav-grid-tab">
                                         <div class="row">
+
+
                                             {{-- Ad Cards --}}
                                             @foreach ($ads as $ad)
                                                 <x-ad-card-grid :ad="$ad" />
@@ -35,35 +37,35 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="nav-list" role="tabpanel"
-                                        aria-labelledby="nav-list-tab">
-                                        <div class="row">
-                                            @foreach ($ads as $ad)
-                                                <x-ad-card-list :ad="$ad" />
-                                            @endforeach
+{{--                                    <div class="tab-pane fade" id="nav-list" role="tabpanel"--}}
+{{--                                        aria-labelledby="nav-list-tab">--}}
+{{--                                        <div class="row">--}}
+{{--                                            @foreach ($ads as $ad)--}}
+{{--                                                <x-ad-card-list :ad="$ad" />--}}
+{{--                                            @endforeach--}}
 
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <!-- Pagination -->
+{{--                                        </div>--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-12">--}}
+{{--                                                <!-- Pagination -->--}}
 
 
-                                                <div class="pagination left">
+{{--                                                <div class="pagination left">--}}
 
-                                                    {{ $ads->links() }}
-                                                    {{-- <ul class="pagination-list">
-                                                        <li><a href="javascript:void(0)">1</a></li>
-                                                        <li class="active"><a href="javascript:void(0)">2</a></li>
-                                                        <li><a href="javascript:void(0)">3</a></li>
-                                                        <li><a href="javascript:void(0)">4</a></li>
-                                                        <li><a href="javascript:void(0)"><i
-                                                                    class="lni lni-chevron-right"></i></a></li>
-                                                    </ul> --}}
-                                                </div>
-                                                <!--/ End Pagination -->
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                                    {{ $ads->links() }}--}}
+{{--                                                    --}}{{-- <ul class="pagination-list">--}}
+{{--                                                        <li><a href="javascript:void(0)">1</a></li>--}}
+{{--                                                        <li class="active"><a href="javascript:void(0)">2</a></li>--}}
+{{--                                                        <li><a href="javascript:void(0)">3</a></li>--}}
+{{--                                                        <li><a href="javascript:void(0)">4</a></li>--}}
+{{--                                                        <li><a href="javascript:void(0)"><i--}}
+{{--                                                                    class="lni lni-chevron-right"></i></a></li>--}}
+{{--                                                    </ul> --}}
+{{--                                                </div>--}}
+{{--                                                <!--/ End Pagination -->--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>

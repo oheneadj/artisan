@@ -2,7 +2,16 @@
     <x-breadcrumbs :message="$page_title" />
     <x-user-layout>
         <div class="dashboard-block mt-0">
-            <h3 class="block-title">Edit Ad</h3>
+            <div class="d-flex justify-content-between align-center">
+                <h3 class="block-title">Edit Ad</h3>
+                <form action="{{route('ad.delete', $ad->id)}}" post="POST" class="mt-4 mx-5">
+                    @csrf
+                    @method('DELETE')
+                    <input type="text" value="{{$ad->id}}" hidden>
+                    <button type="submit" class="btn btn-danger"><i class="lni lni-trash white"></i> Delete</button>
+                </form>
+            </div>
+
             <div class="inner-block">
                 <!-- Start Post Ad Tab -->
                 <div class="post-ad-tab">
@@ -130,36 +139,21 @@
 
                                             <ul>
                                                 @foreach($ad->image as $image)
-                                                    <li class="d-inline"><img width="100" height="100" src="/images/{{ $image->name }}"
+                                                    <li class="d-inline"><img width="100" height="100" src="{{ asset('/storage/images/'.$image->name) }}"
                                                                               class="" alt="#">
                                                     </li>
                                                 @endforeach
-
                                             </ul>
 
-                                        <div class="col-12">
-                                            <label class="text-dark mb-3"><b>Upload Pictures
-                                                    {{ '(6 Maximum)' }}*</b></label>
-                                            <div class="upload-input">
-                                                <input type="file" id="upload" value="{{ old('images') ?? $ad->image }}"
-                                                       name="images[]" multiple>
-                                                <label for="upload" class="content text-center">
-                                                    <span class="text">
-                                                        <span class="d-block mb-15">Drop files anywhere
-                                                            to Upload</span>
-                                                        <span class="mb-15 plus-icon"><i
-                                                                class="lni lni-plus"></i></span>
-                                                        <span class="main-btn d-block btn-hover">Select
-                                                            File</span>
-                                                        <span class="d-block">Maximum upload file size
-                                                            10Mb</span>
-                                                    </span>
-                                                </label>
+                                            <div class="col-12">
+                                                <div class="form-group" >
+                                                    <label>Upload Images (Maximum of 6)</label>
+                                                    <input id="image_upload"  name="image"  type="file" class="filepond" multiple credits="false" >
+                                                    @error('image')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                            @error('images')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
                                         {{-- <div class="col-lg-6 col-12">
                                             <div class="form-group">
                                                 <label class="video-label">Video Link* <span>Input only

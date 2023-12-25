@@ -110,28 +110,37 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <label class="text-dark mb-3"><b>Upload Pictures
-                                                    {{ '(6 Maximum)' }}*</b></label>
-                                            <div class="upload-input">
-                                                <input type="file" id="upload" value="{{ old('images') }}"
-                                                    name="images[]" multiple>
-                                                <label for="upload" class="content text-center">
-                                                    <span class="text">
-                                                        <span class="d-block mb-15">Drop files anywhere
-                                                            to Upload</span>
-                                                        <span class="mb-15 plus-icon"><i
-                                                                class="lni lni-plus"></i></span>
-                                                        <span class="main-btn d-block btn-hover">Select
-                                                            File</span>
-                                                        <span class="d-block">Maximum upload file size
-                                                            10Mb</span>
-                                                    </span>
-                                                </label>
-                                            </div>
-                                            @error('images')
+                                            <div class="form-group" >
+                                                <label>Upload Images (Maximum of 6)</label>
+                                                <input id="image_upload"  name="image"  type="file" class="filepond" multiple credits="false" >
+                                                @error('image')
                                                 <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                                @enderror
+                                            </div>
                                         </div>
+{{--                                        <div class="col-12">--}}
+{{--                                            <label class="text-dark mb-3"><b>Upload Pictures--}}
+{{--                                                    {{ '(6 Maximum)' }}*</b></label>--}}
+{{--                                            <div class="upload-input">--}}
+{{--                                                <input class type="file" id="upload" value="{{ old('images') }}"--}}
+{{--                                                    name="images[]" multiple>--}}
+{{--                                                <label for="upload" class="content text-center">--}}
+{{--                                                    <span class="text">--}}
+{{--                                                        <span class="d-block mb-15">Drop files anywhere--}}
+{{--                                                            to Upload</span>--}}
+{{--                                                        <span class="mb-15 plus-icon"><i--}}
+{{--                                                                class="lni lni-plus"></i></span>--}}
+{{--                                                        <span class="main-btn d-block btn-hover">Select--}}
+{{--                                                            File</span>--}}
+{{--                                                        <span class="d-block">Maximum upload file size--}}
+{{--                                                            10Mb</span>--}}
+{{--                                                    </span>--}}
+{{--                                                </label>--}}
+{{--                                            </div>--}}
+{{--                                            @error('images')--}}
+{{--                                                <small class="text-danger">{{ $message }}</small>--}}
+{{--                                            @enderror--}}
+{{--                                        </div>--}}
                                         {{-- <div class="col-lg-6 col-12">
                                             <div class="form-group">
                                                 <label class="video-label">Video Link* <span>Input only

@@ -6,7 +6,11 @@
 
          <div class="image">
              <a href="{{ route('ad.single', $ad->slug) }}">
-                 <img class="image-card" src="/images/{{ $ad->image->first()->name }}" alt="{{ $ad->name }}">
+                 <img class="image-card" src="
+
+                 {{ $ad->image->count() > 0 ? asset('/storage/images/'.$ad->image->first()->name) : asset('images/ad.jpg')  }}
+
+                 " alt="{{ $ad->name }}">
              </a>
              @if($ad->sale === 1)
                  <i class="cross-badge lni lni-bolt"></i>

@@ -7,12 +7,15 @@
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
-                                    <img class="single-ad" height="350" src="/images/{{ $ad->image->first()->name }}"
+                                    <img class="single-ad" height="350"
+                                         src="
+                                   {{ $ad->image->count() > 0 ? asset('/storage/images/'.$ad->image->first()->name) : asset('images/ad.jpg')  }}
+                                    "
                                         id="current" alt="#">
                                 </div>
                                 <div class="images single-ad-img">
                                     @foreach ($ad->image as $image)
-                                        <img height="60" src="/images/{{ $image->name }}"
+                                        <img height="60" src="{{ asset('/storage/images/'. $image->name) }}"
                                             class="img single-ad-thumbnail" alt="#">
                                     @endforeach
                                 </div>
