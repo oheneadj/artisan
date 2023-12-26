@@ -36,6 +36,7 @@
                  @auth()
                         @if(auth()->user()->id === $ad->user_id)
                              <li class="like"><a href="{{route('ad.edit', $ad->slug)}}"><i class="lni lni-pencil"></i></a>
+                             <li class="like "><a class="bg-danger text-white" href="{{route('ad.edit', $ad->slug)}}"><i class="lni lni-trash white"></i></a>
                          @endif
                  @endauth
                     <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>

@@ -49,8 +49,7 @@ Route::post('/ads', [AdController::class, 'store'])
     ->name('ad.new')
     ->middleware('auth');
 
-
-Route::delete('/ads/ad/{ad}', [AdController::class, 'destroy'])
+Route::delete('/ads/{ad:slug}/delete', [AdController::class, 'destroy'])
     ->name('ad.delete')
     ->middleware('auth');
 
@@ -86,6 +85,9 @@ Route::get('/my-ads', [AdController::class, 'myAds'])
  */
 Route::get('/shops', [ShopController::class, 'index'])
     ->name('shops');
+Route::get('/shops/{shop:slug}/edit', [ShopController::class, 'edit'])
+    ->name('shop.edit')
+    ->middleware('auth');
 Route::get('/my-shop', [ShopController::class, 'user_shop'])
     ->name('user.shop')
     ->middleware('auth');

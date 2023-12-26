@@ -203,9 +203,15 @@ class AdController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Ad $ad)
     {
-        dd('Here');
+
+        if($ad->user_id === auth()->user()->id){
+            $ad->delete();
+            return redirect(route('user.shop'))->with('success', 'Ad deleted successfully');
+        }
+
+        return back()->with('danger', 'Unauthorised!');
     }
 
     public function myAds()

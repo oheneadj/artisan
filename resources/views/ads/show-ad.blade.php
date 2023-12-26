@@ -29,9 +29,17 @@
                                 <h2 class="title">{{ $ad->name }}</h2>
                                 @auth()
                                     @if(auth()->user()->id === $ad->user_id)
-                                        <a href="{{route('ad.edit', $ad->slug)}}">
-                                            <i class="lni lni-pencil text-danger"> Edit</i>
-                                        </a>
+                                        <div>
+                                            <a class="d-inline mx-2" href="{{route('ad.edit', $ad->slug)}}">
+                                                <i class="lni lni-pencil text-danger"> Edit</i>
+                                            </a>
+                                            <form class="d-inline" action="{{route('ad.delete', $ad->slug)}}" method="POST" >
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="text" value="{{$ad->id}}" hidden>
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="lni lni-trash white"></i> Delete</button>
+                                            </form>
+                                        </div>
                                         @endif
                                     @endauth
                             </div>

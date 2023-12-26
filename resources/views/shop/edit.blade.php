@@ -2,18 +2,10 @@
     <x-breadcrumbs :message="$page_title" />
     <x-user-layout>
         <div class="dashboard-block mt-0">
-            <div class="d-flex justify-content-between align-center">
-                <h3 class="block-title">Edit Ad</h3>
-                <form action="{{route('ad.delete', $ad->slug)}}" method="POST" class="mt-4 mx-5">
-                    @csrf
-                    @method('DELETE')
-                    <input type="text" value="{{$ad->id}}" hidden>
-                    <button type="submit" class="btn btn-danger"><i class="lni lni-trash white"></i> Delete</button>
-                </form>
-            </div>
-
+            <h3 class="block-title">Edit Your {{$shop->name}}</h3>
             <div class="inner-block">
                 <!-- Start Post Ad Tab -->
+
                 <div class="post-ad-tab">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -22,14 +14,14 @@
                                     aria-controls="nav-item-info" aria-selected="true">
                                 <span class="serial">01</span>
                                 Step
-                                <span class="sub-title">Ad Information</span>
+                                <span class="sub-title">Shop Information</span>
                             </button>
                             <button class="nav-link" id="nav-item-details-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-item-details" type="button" role="tab"
                                     aria-controls="nav-item-details" aria-selected="false">
                                 <span class="serial">02</span>
                                 Step
-                                <span class="sub-title">Ad Details</span>
+                                <span class="sub-title">Contact Details</span>
                             </button>
                             <button class="nav-link" id="nav-user-info-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-user-info" type="button" role="tab"
@@ -44,17 +36,16 @@
                         <div class="tab-pane fade show active" id="nav-item-info" role="tabpanel"
                              aria-labelledby="nav-item-info-tab">
                             <!-- Start Post Ad Step One Content -->
-                            <div class="step-one-content step-two-content">
-                                <form class="default-form-style" method="post" action="{{ route('ad.update', $ad->slug) }}"
+                            <div class="step-two-content">
+                                <form class="default-form-style" method="post" action="{{ route('store.shop') }}"
                                       enctype="multipart/form-data">
                                     @csrf
-                                    @method('PUT')
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>Ad Title*</label>
-                                                <input name="name" type="text" value="{{ old('name') ?? $ad->name }}"
-                                                       placeholder="Enter Title">
+                                                <label>Shop Name</label>
+                                                <input name="name" value="{{ old('name') ?? $shop->name}}" type="text"
+                                                       placeholder="Enter Shop name">
                                                 @error('name')
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -62,122 +53,101 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>Add Price*</label>
-                                                <input name="price" type="text" value="{{ old('price') ?? $ad->price }}"
-                                                       placeholder="Enter Price">
-                                                @error('price')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mb-4">
-                                            <div class="check-and-pass">
-                                                <div class="row align-items-center">
-                                                    <div class="col-lg-6 col-md-6 col-12">
-                                                        <div class="form-check">
-
-                                                                <input onload="saleToggle()" id="sale_check" name="sale"
-
-                                                                @if(old('sale') OR $ad->sale === 1)
-                                                                      {{'checked'}}
-                                                                @endif
-
-                                                                type="checkbox" class="form-check-input width-auto"
-                                                                       id="saleCheck">
-                                                                <label for="sale" class="form-check-label">Are You
-                                                                    running a special
-                                                                    promotion or sale? </label>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="form-group d-none" id="sale_price">
-                                                <label>Add <span class="dark">Sale/Discount/Promo</span>
-                                                    Price*</label>
-                                                <input  name="sale_price"  type="text" value="{{ old('sale_price') ?? $ad->sale_price }}"
-                                                        placeholder="Enter sale price">
-                                                @error('sale_price')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label>Select Ad Category*</label>
-                                                <div class="selector-head">
-                                                    <span class="arrow"><i class="lni lni-chevron-down"></i></span>
-                                                    <select name="category_id" class="user-chosen-select">
-                                                        <option value="">Select Ad Category
-                                                        </option>
-                                                        @foreach ($categories as $category)
-                                                            @if(($category->id === old('category_id') OR $category->id === $ad->category_id))
-                                                                <option selected value="{{ old('category_id') ?? $category->id }}">{{$categories->find(old('category_id'))->name ?? $category->name }}
-                                                                </option>
-                                                            @endif
-
-                                                            @if($category->id !== $ad->category_id AND $category->id !== old('$category_id'))
-                                                                    <option value="{{ $category->id }}">{{ $category->name }}
-                                                                    </option>
-                                                                @endif
-                                                        @endforeach
-                                                    </select>
-                                                    @error('category_id')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="text-dark mb-3"><b>Ad Pictures
-                                                    {{ '(6 Maximum)' }}*</b></label>
-
-                                            <ul>
-                                                @foreach($ad->image as $image)
-                                                    <li class="d-inline"><img width="100" height="100" src="{{ asset('/storage/images/'.$image->name) }}"
-                                                                              class="" alt="#">
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-
-                                            <div class="col-12">
-                                                <div class="form-group" >
-                                                    <label>Upload Images (Maximum of 6)</label>
-                                                    <input id="image_upload"  name="image"  type="file" class="filepond" multiple credits="false" >
-                                                    @error('image')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        {{-- <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                                <label class="video-label">Video Link* <span>Input only
-                                                        YouTube &amp; Vimeo</span></label>
-                                                <input name="video" type="text" placeholder="Input link">
-                                                <a href="javascript:void(0)" class="add-video"><i
-                                                        class="lni lni-plus"></i> Add Video</a>
-                                            </div>
-                                        </div> --}}
-                                        <div class="col-12">
-                                            <div class="form-group mt-30">
-                                                <label>Ad Description*</label>
-                                                <textarea name="description" placeholder="Input ad description">{{ old('description') ?? $ad->description }}</textarea>
+                                                <label>Shop Description</label>
+                                                <textarea name="description" id="description" cols="30" rows="10">{{ old('description') ?? $shop->description }}</textarea>
                                                 @error('description')
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <div class="form-group button mb-0">
-                                                <button type="submit" class="btn">Update Ad</button>
+                                            <div class="form-group">
+                                                <label>Shop Location</label>
+                                                <input name="location" value="{{ old('location') ?? $shop->location }}" type="text"
+                                                       placeholder="Enter Shop Location">
+                                                @error('location')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Phone Number</label>
+                                                <input name="phone_number" value="{{ old('phone_number') ?? $shop->phone_number }}"
+                                                       type="text" placeholder="Enter Your Business Phone Number">
+                                                @error('phone_number')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Certificate Number</label>
+                                                <input name="certificate_number" value="{{ old('certificate_number') ?? $shop->certificate_number }}"
+                                                       type="text" placeholder="Enter Your Business certificate number">
+                                                @error('certificate_number')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Select Shop Type*</label>
+                                                <div class="selector-head">
+                                                    <span class="arrow"><i class="lni lni-chevron-down"></i></span>
+                                                    <select name="shop_type" class="user-chosen-select">
+                                                        <option value="">Select an option
+                                                        </option>
+                                                        <option value="hair dresser">Hair Dresser</option>
+                                                        <option value="tailor">Tailor</option>
+                                                    </select>
+                                                    @error('shop_type')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label class="mb-2">Upload Shop image*</label>
+                                            <div class="upload-input">
+                                                <input type="file" id="upload" name="image"
+                                                       value="{{ old('image') }}">
+                                                <label for="upload" class="content text-center">
+                                                    <span class="text">
+                                                        <span class="d-block mb-15">Drop file anywhere
+                                                            to Upload</span>
+                                                        <span class="mb-15 plus-icon"><i
+                                                                class="lni lni-plus"></i></span>
+                                                        <span class="main-btn d-block btn-hover">Select
+                                                            File</span>
+                                                        <span class="d-block">Maximum upload file size
+                                                            10Mb</span>
+                                                    </span>
+                                                </label>
+
+                                            </div>
+                                            @error('image')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                                <label class="video-label">Video Link* <span>Input only
+                                                        YouTube &amp; Vimeo</span></label>
+                                                <input name="video" type="text" placeholder="Input link"
+                                                       value="{{ old('video') }}">
+                                                @error('video')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group button mb-0 mt-3">
+
+                                                <button type="submit" class="btn">Update My Shop</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -431,6 +401,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- End Post Ad Tab -->
             </div>
         </div>

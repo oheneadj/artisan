@@ -122,9 +122,14 @@ class ShopController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Shop $shop)
     {
-        //
+        if(auth()->user()->shop->id === $shop->id){
+            return view('shop.edit',[
+                'shop' => $shop,
+                'page_title' => $shop->name,
+            ]);
+        }
     }
 
     /**
