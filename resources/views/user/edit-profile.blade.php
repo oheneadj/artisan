@@ -10,15 +10,16 @@
                         alt="{{ auth()->user()->name }}">
                 </div>
                 <form class="profile-setting-form" method="post"
-                    action="{{ route('update.profile', auth()->user()->id) }}">
+                    action="{{ route('update.profile', auth()->user()->username) }}">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label>Full Name*</label>
-                                <input name="full_name" value="{{ old('full_name') ?? auth()->user()->name }}"
+                                <input name="name" value="{{ old('name') ?? auth()->user()->name }}"
                                     type="text">
-                                @error('full_name')
+                                @error('name')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -49,7 +50,7 @@
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label>Phone Number*</label>
-                                <input name="phone" value="{{ old('phone_number') ?? auth()->user()->phone_number }}"
+                                <input name="phone_number" value="{{ old('phone_number') ?? auth()->user()->phone_number }}"
                                     type="text">
                                 @error('phone_number')
                                     <small class="text-danger">{{ $message }}</small>

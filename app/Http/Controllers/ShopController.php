@@ -20,8 +20,11 @@ class ShopController extends Controller
     public function index()
     {
         return view('shop.index', [
-            "shops" => Shop::with('ad')->latest()
-                ->paginate(6),
+            "shops" => Shop::with('ad')
+                ->latest()
+                ->filter(request(['search']))
+                ->paginate(6)
+            ->withQueryString(),
             "categories" => Category::get()
         ]);
     }
@@ -42,7 +45,6 @@ class ShopController extends Controller
         return view(
             'shop.create',
             [
-
                 'page_title' => "My Shop"
             ]
         );
@@ -53,10 +55,8 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-
-
         // Check if user already has a shop
-        if (Shop::where('user_id', auth()->user()->id)->first() != null) {
+        if (Shop::where('user_id', auth()->user()->id)->first() !== null) {
             //if user has a shop, return to user shop
             return redirect(route('user.shop'));
         }
@@ -65,7 +65,7 @@ class ShopController extends Controller
             'name' => ['required', 'min:3'],
             'location' => ['required'],
             'phone_number' => ['required', 'numeric', 'digits:10', 'unique:shops,phone_number'],
-            'description' => ['required', 'max:250'],
+            'description' => ['required', 'max:500'],
             'certificate_number' => ['required'],
             'shop_type' => ['required'],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
@@ -107,14 +107,12 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-
-        $ads = Ad::where('shop_id', $shop->id);
         return view(
             'shop.show-shop',
             [
                 'page_title' => $shop->name,
                 'shop' => $shop,
-                'ads' => $ads->latest()->paginate(6)
+                'ads' => $shop->ad->latest()->paginate(6)
             ]
         );
     }
@@ -130,14 +128,51 @@ class ShopController extends Controller
                 'page_title' => $shop->name,
             ]);
         }
+        return back()->with('danger', 'Unauthorised');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Shop $shop)
     {
-        //
+
+        if(auth()->user()->shop->id !== $shop->id){
+            return back()->with('danger', 'Unauthorised');
+        }
+
+        $formFields = $request->validate([
+            'name' => ['required', 'min:3'],
+            'location' => ['required'],
+            'phone_number' => ['required', 'numeric', 'digits:10',], // 'unique:shops,phone_number'
+            'description' => ['required', 'max:500'],
+            'certificate_number' => ['required'],
+            'shop_type' => ['required'],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'video' => ['nullable', 'url'],
+        ]);
+
+        if ($request->image) {
+            $image = time() . random_int(1, 999) . '.' . $request->image->extension();
+
+            $request->image->move(public_path('images'), $image);
+            $formFields['logo'] = $image;
+        }
+
+        $formFields['slug'] = Str::slug($formFields['name']);
+
+        $registered_shops_number = Shop::where('name', '=', $formFields['name'])->latest()->count();
+
+        if (($registered_shops_number !== null) && $registered_shops_number >= 1) {
+            $formFields['slug'] .= "-" . $registered_shops_number;
+        }
+
+        if ($shop->update($formFields)) {
+            return  redirect(route('user.shop'))
+                ->with('success', 'Shop updated successfully ');
+        }
+
+        return back()->with('danger', 'Shop creation unsuccessfully');
     }
 
     /**

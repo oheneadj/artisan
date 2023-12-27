@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -63,18 +65,32 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        $user = $request->validate([
-            'full_name' => 'required',
+        $form_fields = $request->validate([
+            'name' => 'required',
             'location' => 'required',
             'card_type' => 'required',
             'card_number' => 'required',
-            'phone_number' => 'required,numeric, size:10',
+            'phone_number' => 'required|numeric|digits:10',
             'email' => 'required',
         ]);
 
-        User::updated($user);
+        $form_fields['username'] = Str::slug($form_fields['name']);
+
+        $users_number = User::where('name', '=', $form_fields['name'])->latest()->count();
+
+        if (($users_number !== null) && $users_number >= 1) {
+            $form_fields['username'] .= "-" . $users_number;
+        }
+
+        if ($user->update($form_fields)) {
+            return  redirect(route('profile'))
+                ->with('success', 'Your profile has been updated successfully');
+        }
+
+        return back()->with('danger', 'User profile update unsuccessful,. Please try again');
+
     }
 
     /**

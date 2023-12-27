@@ -5,7 +5,7 @@
                  <div class="nav-inner">
                      <nav class="navbar navbar-expand-lg">
                          <a class="navbar-brand" href="{{ route('home') }}">
-                             <h4>FashionAid</h4>
+                             <h4>AhofaPa</h4>
                              {{-- <img src="assets/images/logo/fashionaid_logo.png" alt="Logo"> --}}
                          </a>
                          <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"

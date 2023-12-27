@@ -85,23 +85,30 @@ Route::get('/my-ads', [AdController::class, 'myAds'])
  */
 Route::get('/shops', [ShopController::class, 'index'])
     ->name('shops');
+
 Route::get('/shops/{shop:slug}/edit', [ShopController::class, 'edit'])
     ->name('shop.edit')
     ->middleware('auth');
+
 Route::get('/my-shop', [ShopController::class, 'user_shop'])
     ->name('user.shop')
     ->middleware('auth');
+
 Route::get('/shops/create', [ShopController::class, 'create'])
     ->name('create.shop')
     ->middleware('auth');
+
 Route::get('/shops/{shop:slug}', [ShopController::class, 'show'])
     ->name('show.shops');
+
 Route::post('/shops', [ShopController::class, 'store'])
     ->name('store.shop')
     ->middleware('auth');
-Route::put('/shops', [ShopController::class, 'update'])
+
+Route::put('/shops/{shop:slug}/update', [ShopController::class, 'update'])
     ->name('update.shop')
     ->middleware('auth');
+
 Route::delete('/shops', [ShopController::class, 'destroy'])
     ->name('destroy.shop')
     ->middleware('auth');
@@ -112,13 +119,25 @@ Route::delete('/shops', [ShopController::class, 'destroy'])
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{user:slug}', [UserController::class, 'edit'])->name('show.profile');;
+
+    Route::get('/users/{user:slug}', [UserController::class, 'edit'])
+        ->name('show.profile');
+
     Route::post('/users', [UserController::class, 'store']);
-    Route::post('/users/{user}', [UserController::class, 'update'])->name('update.profile');
+
+    Route::put('/users/{user:username}/update', [UserController::class, 'update'])
+        ->name('update.profile');
+
     Route::delete('/users', [UserController::class, 'destroy']);
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-    Route::get('/messages', [UserController::class, 'messages'])->name('messages');
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+
+    Route::get('/dashboard', [UserController::class, 'dashboard'])
+        ->name('dashboard');
+
+    Route::get('/messages', [UserController::class, 'messages'])
+        ->name('messages');
+
+    Route::get('/profile', [UserController::class, 'profile'])
+        ->name('profile');
 });
 
 

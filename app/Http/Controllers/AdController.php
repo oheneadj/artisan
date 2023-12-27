@@ -29,8 +29,11 @@ class AdController extends Controller
     public function index()
     {
         return view('ads.index', [
-            "ads" => Ad::with('shop')->latest()
-                ->paginate(6)->withQueryString(),
+            "ads" => Ad::with('shop')
+                ->latest()
+                ->filter(request(['search']))
+                ->paginate(6)
+                ->withQueryString(),
             "categories" => Category::get()
         ]);
     }
@@ -172,8 +175,6 @@ class AdController extends Controller
         if (($single_ad !== null) && $single_ad >= 1) {
             $formFields['slug'] .= "-" . $single_ad;
         }
-
-
 
         $ad->update($formFields);
 

@@ -2,9 +2,9 @@
     <div class="category-sidebar">
         <!-- Start Single Widget -->
         <div class="single-widget search">
-            <h3>Search Fashion</h3>
-            <form action="item-listing-grid.html#">
-                <input type="text" placeholder="Search Here...">
+            <h3>Search AhofaPa</h3>
+            <form action="{{ request()->url()}}">
+                <input name="search" type="text" placeholder="Search Here...">
                 <button type="submit"><i class="lni lni-search-alt"></i></button>
             </form>
         </div>

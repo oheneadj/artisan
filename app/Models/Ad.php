@@ -24,7 +24,7 @@ class Ad extends Model
      *
      * @var function<string, string>
      */
-    public function shop()
+    public function shop(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Shop::class);
     }
@@ -32,9 +32,9 @@ class Ad extends Model
     /**
      * Relationships
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
@@ -43,9 +43,9 @@ class Ad extends Model
     /**
      * image
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function image()
+    public function image(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Image::class);
     }
@@ -53,10 +53,17 @@ class Ad extends Model
     /**
      * image
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function comment()
+    public function comment(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function scopeFilter ($query, array $filters){
+        if($filters['search'] ?? false) {
+            $query->where('name', 'like', '%'. request('search') . '%')
+            ->orWhere('description', 'like', '%'. request('search') . '%');
+        }
     }
 }
