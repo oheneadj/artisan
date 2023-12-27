@@ -17,6 +17,15 @@
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="nav-grid" role="tabpanel"
                                          aria-labelledby="nav-grid-tab">
+
+                                        @if($shops->count() === 0)
+                                            <div class="row mt-5">
+                                                <div class="col-12">
+                                                    <p class="text-center"> No Shop found that matches your search query</p>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                         <div class="row">
                                             {{-- Ad Cards --}}
                                             @foreach ($shops as $shop)
