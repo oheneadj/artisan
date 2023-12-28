@@ -8,7 +8,7 @@
              <a href="{{ route('ad.single', $ad->slug) }}">
                  <img class="image-card" src="
 
-                 {{ $ad->image->count() > 0 ? asset('/storage/images/'.$ad->image->first()->name) : asset('images/ad.jpg')  }}
+                 {{ $ad->image->count() > 0 ? asset('storage/images/'.$ad->image->first()->name) : asset('images/ad.jpg')  }}
 
                  " alt="{{ $ad->name }}">
              </a>
