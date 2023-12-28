@@ -69,3 +69,25 @@
     border-radius: 50%;
     padding: 0;
 }
+
+.mobile-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    font-size: 38px;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    box-shadow: black;
+    z-index: 99999999;
+}
+
+.mobile-footer i {
+    color: #5830E0;
+}
+.mobile-footer span {
+    font-size: 14px;
+}

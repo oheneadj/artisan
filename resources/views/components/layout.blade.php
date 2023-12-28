@@ -75,6 +75,9 @@
     {{ $slot }}
     <!-- End Items Listing Grid -->
 
+    <!-- Start Mobile Footer Area -->
+    <x-mobile-footer />
+    <!--/ End Mobile Footer Area -->
 
     <!-- Start Footer Area -->
     <x-footer />

@@ -38,6 +38,16 @@
                                      <a href="{{ route('contact-us') }}" aria-label="Toggle navigation"
                                          class="@if (Route::current()->getName() == 'contact-us') {{ 'active' }} @endif">Contact</a>
                                  </li>
+                                 <li class="nav-item">
+                                     <a class="@if (Route::current()->getName() == 'login') {{ 'd-none' }} @endif d-flex justify-content-start d-sm-none"
+                                        href="{{ route('login') }}"><i class="lni lni-enter"> </i>&nbsp;Login
+                                         </a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a class="@if (Route::current()->getName() == 'register') {{ 'd-none' }} @endif d-flex justify-content-start d-sm-none"
+                                        href="{{ route('register') }}"><i class="lni lni-user"></i>&nbsp;Register
+                                        </a>
+                                 </li>
                              </ul>
                          </div> <!-- navbar collapse -->
                          @guest
