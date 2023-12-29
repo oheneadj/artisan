@@ -112,7 +112,7 @@ class ShopController extends Controller
             [
                 'page_title' => $shop->name,
                 'shop' => $shop,
-                'ads' => $shop->ad->latest()->paginate(6)
+                'ads' => Ad::where('shop_id', $shop->id)->latest()->paginate()->withQueryString()
             ]
         );
     }
