@@ -14,7 +14,7 @@ class ImageController extends Controller
             $file_extension = $image->getClientOriginalExtension();
             $file_name = "img". time() . random_int(1, 999) . $file_extension;
             $folder = uniqid('img-', true);
-            $image->storeAs('tmp/'. $folder, $file_name);
+            $image->storeAs('/tmp/'. $folder, $file_name);
 
             TempImage::create([
                 'folder' => $folder,
@@ -30,7 +30,7 @@ class ImageController extends Controller
     public function delete (){
         $temp_file = TempImage::where('folder', request()->getContent())->first();
         if($temp_file){
-            Storage::deleteDirectory('tmp/'. $temp_file->folder);
+            Storage::deleteDirectory('/tmp/'. $temp_file->folder);
             $temp_file->delete();
         }
 

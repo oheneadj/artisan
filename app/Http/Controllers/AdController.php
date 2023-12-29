@@ -75,7 +75,7 @@ class AdController extends Controller
         if($validator->fails()){
             $temp_images = TempImage::where('user_id', auth()->user()->id)->get();
             foreach ($temp_images as $temp_image){
-                Storage::deleteDirectory('images/tmp/'. $temp_image->folder);
+                Storage::deleteDirectory('/images/tmp/'. $temp_image->folder);
                 $temp_image->delete();
             }
             return back()->withErrors($validator)->withinput();
@@ -104,13 +104,13 @@ class AdController extends Controller
 
                     //$image_name = time() . random_int(1, 999) . $image->file;
 
-                Storage::copy('tmp/'. $image->folder . '/' . $image->file,  'images' .'/'. $image->file);
+                Storage::copy('/tmp/'. $image->folder . '/' . $image->file,  '/images' .'/'. $image->file);
 
                     Image::create([
                         'name' => $image->file,
                         'ad_id' => $ad['id']
                     ]);
-                Storage::deleteDirectory('tmp/'. $image->folder);
+                Storage::deleteDirectory('/tmp/'. $image->folder);
                 $image->delete();
                 }
 
@@ -184,13 +184,13 @@ class AdController extends Controller
 
                 //$image_name = time() . random_int(1, 999) . $image->file;
 
-                Storage::copy('tmp/'. $image->folder . '/' . $image->file,  'images' .'/'. $image->file);
+                Storage::copy('/tmp/'. $image->folder . '/' . $image->file,  '/images' .'/'. $image->file);
 
                 Image::create([
                     'name' => $image->file,
                     'ad_id' => $ad['id']
                 ]);
-                Storage::deleteDirectory('tmp/'. $image->folder);
+                Storage::deleteDirectory('/tmp/'. $image->folder);
                 $image->delete();
             }
 
