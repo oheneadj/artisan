@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
 
 
 /**
@@ -32,7 +35,7 @@ class AdController extends Controller
             "ads" => Ad::with('shop')
                 ->latest()
                 ->filter(request(['search']))
-                ->paginate(6)
+                ->paginate(30)
                 ->withQueryString(),
             "categories" => Category::get()
         ]);
@@ -102,9 +105,21 @@ class AdController extends Controller
             $temp_images = TempImage::where('user_id', auth()->user()->id)->get();
             foreach ($temp_images as $image){
 
-                    //$image_name = time() . random_int(1, 999) . $image->file;
+                //$image_name = time() . random_int(1, 999) . $image->file;
 
-                Storage::copy('/tmp/'. $image->folder . '/' . $image->file,  '/images' .'/'. $image->file);
+                // create new manager instance with desired driver
+                $manager = new ImageManager(Driver::class);
+
+                $file = $manager->read(storage_path('/app/public/tmp/'. $image->folder . '/'. $image->file));
+
+
+                // encode jpeg as webp format
+                $encoded_image = $file->toWebp(20);
+
+                $encoded_image->save(storage_path('/app/public/images/'. $image->file));
+
+                //Storage::copy('/tmp/'. $image->folder .'/'. $image->file, '/images/'. $image->file);
+
 
                     Image::create([
                         'name' => $image->file,

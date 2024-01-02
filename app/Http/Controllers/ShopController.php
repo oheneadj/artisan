@@ -23,7 +23,7 @@ class ShopController extends Controller
             "shops" => Shop::with('ad')
                 ->latest()
                 ->filter(request(['search']))
-                ->paginate(6)
+                ->paginate(30)
             ->withQueryString(),
             "categories" => Category::get()
         ]);
