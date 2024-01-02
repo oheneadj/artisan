@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\TempImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
     public function upload(Request $request){
         if($request->hasFile('image')){
             $image = $request->file('image');
-            $file_extension = $image->getClientOriginalExtension();
-            $file_name = "img". time() . random_int(1, 999) . $file_extension;
-            $folder = uniqid('img-', true);
-            $image->storeAs('public/tmp/'. $folder, $file_name);
+            $file_name = Str::uuid() . '.webp'; //. $image->getClientOriginalExtension();
+            $folder = Str::uuid();
+            $image->storeAs('tmp/'. $folder, $file_name);
 
             TempImage::create([
                 'folder' => $folder,
@@ -30,7 +30,7 @@ class ImageController extends Controller
     public function delete (){
         $temp_file = TempImage::where('folder', request()->getContent())->first();
         if($temp_file){
-            Storage::deleteDirectory('public/tmp/'. $temp_file->folder);
+            Storage::deleteDirectory('tmp/'. $temp_file->folder);
             $temp_file->delete();
         }
 
