@@ -155,6 +155,8 @@
             },
         },
     });
+
+    FilePond:init
 </script>
 
 </body>

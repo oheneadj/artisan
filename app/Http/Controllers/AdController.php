@@ -107,13 +107,14 @@ class AdController extends Controller
 
                 //$image_name = time() . random_int(1, 999) . $image->file;
 
-                // create new manager instance with desired driver
-                $manager = new ImageManager(Driver::class);
+                // read image from disk
 
-                $file = $manager->read(storage_path('/app/public/tmp/'. $image->folder . '/'. $image->file));
+                $file = ImageManager::imagick()->read(storage_path('/app/public/tmp/'. $image->folder . '/'. $image->file));
 
+                // Resize image to 1:1
+                $file = $file->resize(1000, 1000);
 
-                // encode jpeg as webp format
+                // encode image as webp format
                 $encoded_image = $file->toWebp(20);
 
                 $encoded_image->save(storage_path('/app/public/images/'. $image->file));

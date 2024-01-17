@@ -15,11 +15,13 @@
              </li>
              <li><i class="lni lni-certificate red"></i> <span class="red"> Status: Not Verified</span>
              </li>
-             <li><a class="d-inline" href="{{route('shop.edit', $shop->slug)}}">
-                     <i class="lni lni-pencil text-danger"> Edit</i>
-                 </a>
-             </li>
+             @auth()
+                 <li><a class="d-inline" href="{{route('shop.edit', $shop->slug)}}">
+                         <i class="lni lni-pencil text-danger"> Edit</i>
+                     </a>
+                 </li>
 
+             @endauth
              <li>
                  <div class="gmap_canvas"><iframe width="100%" height="300" id="gmap_canvas"
                          src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
